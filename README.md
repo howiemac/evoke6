@@ -1,6 +1,6 @@
 # evoke5
 
-This is the python 3 version of EVOKE, currently in active development.
+This is the python 3 version of EVOKE, currently in _active_ development.
 
 EVOKE is a simple and powerful python web framework with pythonic "evo" templating.
 
