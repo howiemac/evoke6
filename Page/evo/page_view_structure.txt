@@ -1,0 +1,11 @@
+Page_view_form.evo
+  Page_header.evo
+    Page_header_start.evo        Page Options / admin links
+    Page_header_end.evo          placeholder for local override (an empty div to prevent evo from throwing up...)
+  Page_actions.evo               Actions - dodgy use of forms
+  Page_content_header.evo        "Header within page content" - odd indentation
+    Page_view_images.evo 
+    Page_view_files.evo
+  Page_child_add.evo            (formerly Page_subpages.evo)
+  Page_child_pages.evo
+  Page_footer.ev

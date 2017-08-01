@@ -1,0 +1,4 @@
+if [ -f twistd.pid]
+then
+    kill `cat twistd.pid`  
+fi
