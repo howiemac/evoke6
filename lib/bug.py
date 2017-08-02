@@ -2,7 +2,7 @@
     it can be sent as an email
 """
 import sys
-from .library import email
+from .email import email
 
 
 class Formatter(object):
