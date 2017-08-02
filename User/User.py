@@ -464,10 +464,10 @@ Welcome to %s.
   def welcome(self,req):
     "the welcome page, when no object/instance is specified in the URL"
     if req.return_to:
-      print('REDIRECT c', req.return_to, type(req.return_to))   
+#      print('REDIRECT c', req.return_to, type(req.return_to))   
       return req.redirect(req.return_to)
     url = self.Page.get(self.Config.default_page).url()
-    print('REDIRECT c', url)   
+#    print('REDIRECT c', url)   
     return req.redirect(url)
 # or use this if Page is not installed or in use: 
 #    return self.get(1).view(req)

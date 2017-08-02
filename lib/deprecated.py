@@ -52,7 +52,7 @@ def hours(text,negate=0):
     text=float(text)
   except:
     pass  
-  if type(text)!=type(''): #if not a string, assume we have a number
+  if not isinstance(text, type('')): #if not a string, assume we have a number
     try:
       text="%d:%s" % divmod(int(text*60),60) 
     except:
@@ -71,16 +71,16 @@ def value(text):
      returns 0 for empty or invalid strings
      if it gets a number, returns that as long integer
   """
-  if type(text)!=type(''): #if not a string, perhaps it is already a number? 
-    return safelong(text)
+  if not isinstance(text, type('')): #if not a string, perhaps it is already a number? 
+    return safeint(text)
   try:
     sign,pounds,pence=_money(text.strip())
-    v= (safelong(pounds)*100)+safelong(pence)
+    v= (safeint(pounds)*100)+safeint(pence)
     return sign and -v or v
   except:
     try: #have we 'hours' format?
       sign,hours,minutes=_hours(text)
-      return (safelong(hours)*60)+safelong(minutes)
+      return (safeint(hours)*60)+safeint(minutes)
     except:
       return 0
 
@@ -92,7 +92,7 @@ def _money(text,rex=re.compile('(-?)([0-9]*)\.?([0-9]*)')):
 def money(text,negate=0,zeros=0):
   """ converts input string, or number of pence, to user 'money' text format ie '?.??'
   """
-  if type(text)!=type(''): #if not a string, assume we have a number
+  if not isinstance(text, type('')): #if not a string, assume we have a number
     try:
       text=str(text) #convert to string
       if (len(text)==1):

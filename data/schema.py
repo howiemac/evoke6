@@ -197,7 +197,7 @@ class Schema(object):
     }    
     sql="CREATE TABLE %(table)s(\nuid int(11) NOT NULL auto_increment,\n%(columns)s,\n%(keys)s\n) ENGINE=MyISAM CHARSET=utf8;" % data
     if hasattr(self,'insert'):
-        if type(self.insert)==type({}):#allow for single item
+        if isinstance(self.insert, type({})):#allow for single item
           self.insert=[self.insert]#convert to list
         for row in self.insert:
           sql+="\nINSERT INTO %s %s VALUES %s;" % (self.tablesql,str(sql_list(list(row.keys()))).replace("'","`"),sql_list(list(row.values())))

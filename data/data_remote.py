@@ -6,7 +6,7 @@ class RemoteSQLDataObject(MassProducedSQLDataObject):
   def flatten(self, d):
     "flatten out our datetime objects for marshal"
     for k in d:
-      if type(d[k]) is datetime:
+      if isinstance(d[k], datetime):
         d[k] = repr(d[k])
 
   def all_change(self):
@@ -43,7 +43,7 @@ class RemoteSQLDataObject(MassProducedSQLDataObject):
     #if req['request']['REMOTE_ADDR'] != '127.0.0.1':
     if req['request'].getClientIP() != '127.0.0.1':
 #      log('remote request?!')
-      raise 'local requests only!'
+      raise # 'local requests only!'
 #    log('local request')
     args = cls.typecast(req)
     uid = int(args['uid'])

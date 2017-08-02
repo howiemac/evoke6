@@ -97,9 +97,6 @@ class Evo(object):
       wrapper=wrapper or req.get('wrapper','wrapper.evo')
     #and run the python code
     res=wrapper and self.wrap(cob.pyc,ob,req,wrapper) or self.evaluate(cob.pyc,ob,req)
-    if type(res)!=type(""):  # check for rogue unicode strings in the mix, which will upgrade the entire page to unicode, and thus cause an http error
-      print("WARNING: UNICODE STRING in %s - converted to str" % self.path)
-      return str(res)
     return res
 
   def evaluate(self,pyc,ob,req):
@@ -164,7 +161,7 @@ class Evo(object):
 #        print "GOT",x,xindent,indent,stack
       if stack and indent<=xindent:
 #        for i in range (xindent-indent+1):
-        while 1: 
+        while True: 
           xxindent=xindent 
           e,xindent,kind=pop()
           if (e is not None):

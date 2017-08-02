@@ -28,7 +28,7 @@ class DB(object):
     "set up connection pools"
     # allow for legacy config
     # - check for space and comma delimited strings
-    if type(connect_config) == str:
+    if isinstance(connect_config, str):
       if ',' in connect_config:
         delim = ','
       else:

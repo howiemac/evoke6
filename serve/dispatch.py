@@ -160,7 +160,7 @@ class dispatcherCode(Parser):
     # check user rights
     if req.user.is_guest() and \
        (req.user.login_failure(req) or not self.guest_allowed(req, fn, ob)):
-      print ('USER X', req.user.is_guest(), req.user.login_failure(req), self.guest_allowed(req, fn, ob))     
+#      print ('USER X', req.user.is_guest(), req.user.login_failure(req), self.guest_allowed(req, fn, ob))     
       req.return_to = req.get_uri()  # makes login return to the desired page
       return req.user.login(req)
     # check permits for this method, and do it!

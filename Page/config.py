@@ -37,8 +37,8 @@ class Page(Schema):
   score=INT
   prefs=TEXT
   insert=[
-    dict(uid=1,parent=1,name='root',kind='page',lineage="."),
-    dict(uid=2,parent=1,name='admin',kind='page',lineage=".1."),
+    dict(uid=1,parent=1,name='root',kind='root',lineage="."),
+    dict(uid=2,parent=1,name='admin',kind='admin',lineage=".1."),
     ]
 
  

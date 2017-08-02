@@ -1,20 +1,15 @@
 """
-evoke library type interface
+evoke library interface
 
 
-(IHM April 2017)
+(IHM April 2007, 2017)
 """
 
-#make everything visible as base.lib.types
-from .INT import INT,SMALLINT,TINYINT
-from .FLOAT import FLOAT
-from .STR  import TAG, STR, CHAR
-from .DATE import DATE
-from .TEXT  import TEXT
-from .REL import REL
-from .FLAG import FLAG
-from .BLOB import BLOB
-from .library import sql_list, safeint, httpDate, email, page, prev, next
+#make everything visible as base.lib
+from .library import * 
+from ..types import *
+from .deprecated import *
 from .error import Error
-from .permit import Permit
+from .permit import Permit, Condition
 from .bug import send_error
+

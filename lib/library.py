@@ -11,10 +11,8 @@ def httpDate(self, when=None, rfc='1123'): generates rfc standard dates strings 
 
 def turnaround(start,end):   calculates turnaround, in working days, ie ignoring weekends
                              accepts dates in any format  
-
 def asItems(text):
 def counted(items,start=1):  converts list of items into list of (count,item) pairs
-def safelong(num):           converts to longint, regardless
 def safeint(num):            converts to int, regardless
 def sn(ok):                  converts boolean value to +1 or -1
 
@@ -24,7 +22,7 @@ def percent(a,b):            returns string repr of a as a percentage of b (to n
 
 def email(FROM,TO,text,html=0):	sends an email message - defaults to plain text
 
-def page(req,pagesize=50):   returns limit parameter for self.list()
+def page(req,pagesize=50):   for paging: returns limit parameter for self.list()
 
 def idf(t):                  fixes t into an id which wont break html - not foolproof
 
@@ -32,7 +30,7 @@ def url_safe(text):          fixes url for http
 
 def csv_format(s):           cleans syntax problems for csv output
 
-def sql_list(val):	     converts single value or list or tuple into sql format list for 'is in' etc.
+def sql_list(val):          converts single value or list or tuple into sql format list for 'is in' etc.
 
 (Ian Howie Mackenzie 2/11/2005 onwards. Email enhancements by Chris J Hurst)
 """
@@ -84,8 +82,8 @@ def elapsed(seconds,format=""):
     """converts time in seconds into days hours mins secs 
     format, if given, can be "d:h:m:s", or "h:m:s", or "m:s", otherwise long format is used
     ( adapted from zope ApplicationManager.py )
-    """ 
-    s=safeint(seconds) 
+    """
+    s=safeint(seconds)
     d=0
     h=0
     if (not format) or format.startswith("d:"):
@@ -95,14 +93,14 @@ def elapsed(seconds,format=""):
       h=int(s/3600)
       s=s-(h*3600)
     m=int(s/60)
-    s=s-(m*60) 
-    if format:          
+    s=s-(m*60)
+    if format:
       if d:
         return ('%d:%02d:%02d:%02d' % (d, h, m, s))
       if h:
         return ('%d:%02d:%02d' % (h, m, s))
       return ('%d:%02d' % (m, s))
-    else: # long format     
+    else: # long format
       d=d and ('%d day%s'  % (d, (d != 1 and 's' or ''))) or ''
       h=h and ('%d hour%s' % (h, (h != 1 and 's' or ''))) or ''
       m=m and ('%d min' % m) or ''
@@ -117,7 +115,7 @@ process_start=int(time())
 
 def turnaround(start,end):
     """calculates turnaround, in working days, ie ignoring weekends
-       accepts dates in any format  
+       accepts dates in any format
     """
     start=DATE(start).datetime.date()
     end=DATE(end).datetime.date()
@@ -133,7 +131,7 @@ def turnaround(start,end):
 def asItems(text):
     try:
         n = int(text)
-        if n==0: 
+        if n==0:
             return ''
         return repr(n)
     except:
@@ -148,32 +146,25 @@ def counted(items,start=1):
      n+=1
    return z
 
-def safelong(num):
-  """converts to longint, regardless
-  """
-  try:v=int(num)
-  except:v=0 
-  return v  
-
 def safeint(num):
   """converts to int, regardless
   """
   try:v=int(num)
   except:v=0
-  return v  
+  return v
 
 def safefloat(num):
   """converts to float, regardless
   """
   try:v=float(num)
   except:v=0.0
-  return v  
+  return v
 
 def sn(ok):
   """converts boolean value to +1 or -1
   """
   if ok:return 1
-  else: return -1      
+  else: return -1
 
 # number utilities ##################
 
@@ -182,7 +173,7 @@ def limit(v,lo,hi):
   return min(hi,max(lo,v))
 
 # number formatting ############
-  
+
 def percent(a,b):
   "returns string repr of a as a percentage of b (to nearest full percent)"
   return '%d%%' % (0.5+float(a)*100/float(b))
@@ -196,10 +187,10 @@ def prev(p,seq):
     if i:
       return seq[i-1]
     else:
-      return None  
+      return None
   except:
     return None
-  
+
 def next(p,seq):
   "expects current object 'p', and sequence of objects 'seq' - returns next object"
   try:
@@ -209,10 +200,10 @@ def next(p,seq):
 
 ################## email #######################
 
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
+from email.MIMEBase import MIMEBase
+from email import Encoders
 import smtplib
 
 def email(FROM,TO,subject="", text="",html="",SMTP='127.0.0.1',LOGIN=[], sender="", replyto="", attachments={}):
@@ -242,14 +233,14 @@ def email(FROM,TO,subject="", text="",html="",SMTP='127.0.0.1',LOGIN=[], sender=
   root.attach(alt)
   if html:
     alt.attach(MIMEText(html, 'html'))
-  else:  
+  else:
     alt.attach(MIMEText(text))
 
   # include attachments
   for filename,content in list(attachments.items()):
     part = MIMEBase('application', 'octet-stream')
     part.set_payload(content)
-    encoders.encode_base64(part)
+    Encoders.encode_base64(part)
     part.add_header('Content-Disposition', 'attachment; filename=%s' % filename)
     root.attach(part)
 
@@ -259,13 +250,13 @@ def email(FROM,TO,subject="", text="",html="",SMTP='127.0.0.1',LOGIN=[], sender=
     smtp.connect(SMTP)
     if LOGIN:
       smtp.login(*LOGIN)
-    for t in TO: 
+    for t in TO:
       try:
         root['To']=t
         smtp.sendmail(FROM, t, root.as_string())
 #        print "SENT: FROM=",FROM,' TO=',t,' ROOT=', root.as_string()
         del root['To'] # need to del this, as the message class __setitem__ appends rather than replaces
-      except: 
+      except:
         print("SENDMAIL REFUSAL: FROM=",FROM,' TO=',t,' ROOT=', root.as_string())
     smtp.quit()
   except:

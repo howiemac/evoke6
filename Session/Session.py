@@ -20,14 +20,14 @@ class Session(object):
 #      print "we have an avatar: ", avatarId, " maps to user ", user.id 
     elif '__user__' in req and '__pass__' in req:
       user = self.User.fetch_if_valid(req['__user__'], req['__pass__']) or guest # returns guest if not valid
-      print ("USER we have a login, __user__ ", req['__user__'], " maps to user ", user.id)
+#      print ("USER we have a login, __user__ ", req['__user__'], " maps to user ", user.id)
     else:
       user = guest
       nocred = True
 #      print "no credentials - we assume guest unless the session tells us otherwise"
 
     id = str(req.request.getSession().uid, 'utf8')
-    print('USER we id', id)
+#    print('USER id', id)
     # look for an existing session
     sessions = self.list(id=id, stage='')
     if sessions:

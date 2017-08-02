@@ -14,7 +14,7 @@ except ImportError:
   user_agents = None
 
 # Session based cache
-from zope.interface import Interface, implements, implementer  # , Attribute
+from zope.interface import Interface, implementer
 from twisted.python.components import registerAdapter
 from twisted.web.server import Session
 
