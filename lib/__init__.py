@@ -15,7 +15,7 @@ from .REL import REL
 from .FLAG import FLAG
 from .BLOB import BLOB
 from .library import sql_list, safeint, httpDate, page, prev, next
-from email import email
+from .email import email
 from .error import Error
 from .permit import Permit
 from .bug import send_error
