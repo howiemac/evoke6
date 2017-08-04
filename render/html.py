@@ -20,7 +20,7 @@ class TemplateNotFound(Exception):
 
 
 class Html(object):
-  "a la template.py, a decorator to create an evocative function!"
+  "a decorator to create an evocative function"
 
   def __init__(self, *a, **k):
     ""
