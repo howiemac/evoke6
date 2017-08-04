@@ -426,48 +426,7 @@ style = tag('style')
 font = tag('font')
 strong = tag('strong')
 
-# special tags
-
-# compound button tags
-
-
-def buttontag(name):
-    "class factory to make button tag classes"
-    self = type(name, (buttonbase, ), {})
-    self._cls = tag("div", cls=name)
-    return self
-
-
-_submit = tag(
-    'input/', type='submit'
-)  #  we are using input rather than button tags for IE compatibility
-
-
-class buttonbase(_submit):
-    def __init__(self, value="", **attributes):
-        _submit.__init__(
-            self, value=value,
-            **attributes)  # map tag contents to input value attribute
-
-    def out(self, indent=0):
-        return self._cls(_submit.out(self, indent + 1)).out(
-            indent
-        )  # output input submit tag wrapped in div tag of suitable class
-
-
-buttonhot = buttontag("buttonhot")
-buttonnorm = buttontag("buttonnorm")
-buttoncool = buttontag("buttoncool")
-buttonbig = buttontag("buttonbig")
-buttontouch = buttontag("buttontouch")
-buttontouch_small = buttontag("buttontouch_small")
-
-## table contents is a list of rows of cells
-#tab=tag('table',summary="",caption="",)
-#tab.template=
-
 ## logic
-
 
 def let(namespace, **args):
     "allows local variable assignment, and macro blocks"
@@ -489,19 +448,3 @@ def content(ob, req):
 
 namespace = locals()
 
-############################################################
-#test
-##########################################################
-
-if __name__ == '__main__':  #test
-    sys.path.append('/evoke')
-    ob = EvoCacheObject()
-    ob.Config = EvoCacheObject()
-    ob.Config.app_filepath = ""
-    ob.Config.base_filepath = "/evoke/base/"
-    ob.Config.app = 'test'
-    ob.items = [EvoCacheObject() for i in ("ONE", "TWO", "THREE")]
-    ob.title = "TEST TITLE"
-    e = Evo("test.evo")
-    print("---------------------------------------")
-    print(e(ob, {}))
