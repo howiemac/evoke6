@@ -6,32 +6,31 @@ This module implements the BLOB class.
 
 import MySQLdb
 
+
 class BLOB(str):
-  """
+    """
   simple blob handling
   """
 
-  def __new__(self,data=""):
-    self.data=data
+    def __new__(self, data=""):
+        self.data = data
 
-  def sql(self, quoted=True):
-    """ gives sql string format, including quotes 
+    def sql(self, quoted=True):
+        """ gives sql string format, including quotes 
     """
-    if quoted:
-      return '"%s"' % MySQLdb.escape_string(str(self.data))
-    else:
-      return '%s' % MySQLdb.escape_string(str(self.data))
+        if quoted:
+            return '"%s"' % MySQLdb.escape_string(str(self.data))
+        else:
+            return '%s' % MySQLdb.escape_string(str(self.data))
 
-  def __str__(self):
-    if isinstance(self.data, type('')):
-      return self.data
-    else:#must be array
-      return self.data.tostring()
+    def __str__(self):
+        if isinstance(self.data, type('')):
+            return self.data
+        else:  #must be array
+            return self.data.tostring()
 
-  def __repr__(self):
-    return repr(self.data)
+    def __repr__(self):
+        return repr(self.data)
 
-
-  _v_default=""
-  _v_mysql_type="blob"
-
+    _v_default = ""
+    _v_mysql_type = "blob"

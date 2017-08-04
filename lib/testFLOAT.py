@@ -44,8 +44,8 @@ class TestFLOAT(unittest.TestCase):
 
     def testSqlType(self):
         """ check sql type """
-        a=FLOAT(1.23)
-        self.assertEqual(a._v_mysql_type,"float")
+        a = FLOAT(1.23)
+        self.assertEqual(a._v_mysql_type, "float")
 
     def testArithmeticOperations(self):
         """ check some arithmetic operations """
@@ -56,10 +56,10 @@ class TestFLOAT(unittest.TestCase):
         x += y
         self.assertEqual(x, 30.23)
 
-        x *= y # x is no longer a FLOAT...
+        x *= y  # x is no longer a FLOAT...
         self.assertEqual(x, 238.5147)
 
-        self.assertEqual(FLOAT('2.6')/2,FLOAT('1.3'))
+        self.assertEqual(FLOAT('2.6') / 2, FLOAT('1.3'))
 
 
 if __name__ == '__main__':

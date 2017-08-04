@@ -6,11 +6,11 @@ evoke library type interface
 """
 
 #make everything visible as base.lib.types
-from .INT import INT,SMALLINT,TINYINT
+from .INT import INT, SMALLINT, TINYINT
 from .FLOAT import FLOAT
-from .STR  import TAG, STR, CHAR
+from .STR import TAG, STR, CHAR
 from .DATE import DATE
-from .TEXT  import TEXT
+from .TEXT import TEXT
 from .REL import REL
 from .FLAG import FLAG
 from .BLOB import BLOB

@@ -75,14 +75,16 @@ class TestINT(unittest.TestCase):
         self.assertEqual(INT(9) // 4, 2)
         self.assertEqual(9 / INT(4), 2)
         self.assertEqual(9 // INT(4), 2)
+
     def testSqlType(self):
         """ check sql type """
-        a=TINYINT(123)
-        b=SMALLINT(456)
-        c=INT(789)
-        self.assertEqual(a._v_mysql_type,"tinyint")
-        self.assertEqual(b._v_mysql_type,"smallint")
-        self.assertEqual(c._v_mysql_type,"int(11)")
+        a = TINYINT(123)
+        b = SMALLINT(456)
+        c = INT(789)
+        self.assertEqual(a._v_mysql_type, "tinyint")
+        self.assertEqual(b._v_mysql_type, "smallint")
+        self.assertEqual(c._v_mysql_type, "int(11)")
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -28,67 +28,73 @@
 
 
 class Permit(object):
-  "sets permit on a function"
-  def __init__(self, perm):
-    ""
-    self.perm = perm
+    "sets permit on a function"
 
-  def __call__(self, fn):
-    ""
-    fn.permit = self.perm
-    return fn
+    def __init__(self, perm):
+        ""
+        self.perm = perm
+
+    def __call__(self, fn):
+        ""
+        fn.permit = self.perm
+        return fn
 
 
 class Condition(object):
-  "sets a condition on a function"
-  def __init__(self, *args, **keywords):
-    "*args are ignored (for now) **keywords are conditions"
-    self.args = args
-    self.keywords = keywords
-    self.isin = self.keywords.get('isin', {})
-    if 'isin' in keywords:
-      del self.keywords['isin']
+    "sets a condition on a function"
 
-  def check(self, ob):
-    "tests whether the object matches self.keywords and self.isin"
-    for k, v in list(self.keywords.items()):
-      if not hasattr(ob, k):
-        # fail if keyword doesn't exist in ob
-        return False
-      if getattr(ob, k) != v:
-        # fail if keyword doesn't match value in ob
-        return False
+    def __init__(self, *args, **keywords):
+        "*args are ignored (for now) **keywords are conditions"
+        self.args = args
+        self.keywords = keywords
+        self.isin = self.keywords.get('isin', {})
+        if 'isin' in keywords:
+            del self.keywords['isin']
 
-    # test isin
-    for k, v in list(self.isin.items()):
-      # ignore empty items
-      if not v:
-        continue
-      # fail for nonexistent keywords
-      if not hasattr(ob, k):
-        return False
-      # fail if unmatched
-      if getattr(ob, k) not in v:
-        return False
+    def check(self, ob):
+        "tests whether the object matches self.keywords and self.isin"
+        for k, v in list(self.keywords.items()):
+            if not hasattr(ob, k):
+                # fail if keyword doesn't exist in ob
+                return False
+            if getattr(ob, k) != v:
+                # fail if keyword doesn't match value in ob
+                return False
 
-    # all keywords have been matched
-    return True
+        # test isin
+        for k, v in list(self.isin.items()):
+            # ignore empty items
+            if not v:
+                continue
+            # fail for nonexistent keywords
+            if not hasattr(ob, k):
+                return False
+            # fail if unmatched
+            if getattr(ob, k) not in v:
+                return False
 
-  def __call__(self, fn):
-    "apply condition to function"
-    fn.condition = self.check
-    return fn
+        # all keywords have been matched
+        return True
+
+    def __call__(self, fn):
+        "apply condition to function"
+        fn.condition = self.check
+        return fn
 
 
 # testing
 
+
 def admin(fn):
-  ""
-  return Permit('main.admin')(fn)
+    ""
+    return Permit('main.admin')(fn)
+
 
 if __name__ == '__main__':
-  @Permit('main.admin')
-  def test():
-    return test.permit
-  assert test() == 'main.admin'
-  print('OK')
+
+    @Permit('main.admin')
+    def test():
+        return test.permit
+
+    assert test() == 'main.admin'
+    print('OK')

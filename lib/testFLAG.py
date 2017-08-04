@@ -18,54 +18,55 @@ class TestFLAG(unittest.TestCase):
 
     def testDefaultCreation(self):
         """ check instance creation - no parameter defaults to 0 """
-        x=FLAG()
+        x = FLAG()
         self.assertFalse(x)
-        self.assertEqual(str(x),'N')
+        self.assertEqual(str(x), 'N')
 
     def testNumericCreation(self):
         """ check instance creation - numeric parameter """
-        x=FLAG(123)
-        self.assertEqual(x,1)
-        y=FLAG(0)
+        x = FLAG(123)
+        self.assertEqual(x, 1)
+        y = FLAG(0)
         self.assertFalse(y)
 
     def testBooleanCreation(self):
         """ check instance creation - boolean parameter """
-        x=FLAG(True)
+        x = FLAG(True)
         self.assertTrue(x)
-        self.assertEqual(str(x),'Y')
-        y=FLAG(False)
+        self.assertEqual(str(x), 'Y')
+        y = FLAG(False)
         self.assertFalse(y)
 
     def testStringCreation(self):
         """ check instance creation - string parameter """
-        x=FLAG("whatever")
+        x = FLAG("whatever")
         self.assertTrue(x)
 
     def testSQLOutput(self):
         """ check quoted and unquoted output for sql """
-        x=FLAG(123)
-        y=FLAG()
-        self.assertEqual(x.sql(),"'Y'")
-        self.assertEqual(y.sql(),"''")
-        self.assertEqual(x.sql(quoted=False),"Y")
+        x = FLAG(123)
+        y = FLAG()
+        self.assertEqual(x.sql(), "'Y'")
+        self.assertEqual(y.sql(), "''")
+        self.assertEqual(x.sql(quoted=False), "Y")
 
     def testBooleanOperations(self):
         """ check some boolean operations """
-        x=FLAG("Y")
-        y=FLAG()
-        z=FLAG(1)
+        x = FLAG("Y")
+        y = FLAG()
+        z = FLAG(1)
         self.assertTrue(x or y)
         self.assertTrue(x or False)
         self.assertTrue(x and not y)
-        self.assertEqual(x,z)
-        self.assertFalse(x!=z)
-        self.assertEqual(x,True)
+        self.assertEqual(x, z)
+        self.assertFalse(x != z)
+        self.assertEqual(x, True)
 
     def testSqlType(self):
         """ check sql type """
-        a=FLAG("Y")
-        self.assertEqual(a._v_mysql_type,"char(1)")
+        a = FLAG("Y")
+        self.assertEqual(a._v_mysql_type, "char(1)")
+
 
 if __name__ == '__main__':
     unittest.main()

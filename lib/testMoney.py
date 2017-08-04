@@ -6,21 +6,22 @@ import unittest
 
 
 class TestMoney(unittest.TestCase):
-  ""
-  def setUp(self):
     ""
 
-  def tearDown(self):
-    ""
+    def setUp(self):
+        ""
 
-  def testZero(self):
-    ""
-    self.assertEqual(MONEY('0'), MONEY(0))
+    def tearDown(self):
+        ""
 
-  def testWholeNumber(self):
-    "old version of MONEY didn't handle whole numbers"
-    self.assertEqual(MONEY('1'), MONEY('1.00'))
+    def testZero(self):
+        ""
+        self.assertEqual(MONEY('0'), MONEY(0))
+
+    def testWholeNumber(self):
+        "old version of MONEY didn't handle whole numbers"
+        self.assertEqual(MONEY('1'), MONEY('1.00'))
 
 
 if __name__ == '__main__':
-  unittest.main()
+    unittest.main()

@@ -19,11 +19,7 @@ config file for app
 #class Test(Schema):
 #  pass
 
-#from base.config_base import User as BaseUser 
+#from base.config_base import User as BaseUser
 #
 #class User(BaseUser):
 #  pass
-
-  
-  
-

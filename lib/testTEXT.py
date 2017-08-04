@@ -19,7 +19,5 @@ class TestTEXT(unittest.TestCase):
         """ Tidy up after testing. """
 
 
-
-
 if __name__ == '__main__':
     unittest.main()

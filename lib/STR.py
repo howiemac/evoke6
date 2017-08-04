@@ -16,46 +16,48 @@ Note that, if indexed (ie KEY), STR will be text-indexed (ie fulltext), while TA
 
 import re
 
+
 def fixed_for_sql(text):
-  "makes essential fixes for use in sql"
-  return str(text).replace('\\','\\\\').replace("'","\\'")
+    "makes essential fixes for use in sql"
+    return str(text).replace('\\', '\\\\').replace("'", "\\'")
+
 
 class STR(str):
-  """
+    """
   simple string handling
   """
 
-  def __new__(self,value=""):
-    if not (value and isinstance(value,str)):
-      return str.__new__(self,"")
-    else:
-      return str.__new__(self,value.strip(' '))
+    def __new__(self, value=""):
+        if not (value and isinstance(value, str)):
+            return str.__new__(self, "")
+        else:
+            return str.__new__(self, value.strip(' '))
 
-  def sql(self, quoted=True):
-    """ gives sql string format, including quotes
+    def sql(self, quoted=True):
+        """ gives sql string format, including quotes
     """
-    s=fixed_for_sql(self)
-    return ("'%s'" % s) if quoted else s
+        s = fixed_for_sql(self)
+        return ("'%s'" % s) if quoted else s
 
-  _v_default=""
-  _v_mysql_type="mediumtext"
+    _v_default = ""
+    _v_mysql_type = "mediumtext"
+
 
 class TAG(STR):
-  _v_mysql_type="varchar(255)"
+    _v_mysql_type = "varchar(255)"
 
-  def sql(self, quoted=True):
-    """ gives sql string format, including quotes. limted to first 255 chars
+    def sql(self, quoted=True):
+        """ gives sql string format, including quotes. limted to first 255 chars
     """
-    s=fixed_for_sql(self[:255])
-    return ("'%s'" % s) if quoted else s
+        s = fixed_for_sql(self[:255])
+        return ("'%s'" % s) if quoted else s
+
 
 class CHAR(STR):
-  _v_mysql_type="char(1)"
+    _v_mysql_type = "char(1)"
 
-  def sql(self, quoted=True):
-    """ gives sql string format, limited to first char
+    def sql(self, quoted=True):
+        """ gives sql string format, limited to first char
     """
-    s=fixed_for_sql(self and self[0] or '')
-    return ("'%s'" % s) if quoted else s
-
-
+        s = fixed_for_sql(self and self[0] or '')
+        return ("'%s'" % s) if quoted else s

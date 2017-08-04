@@ -1,11 +1,12 @@
 """ mix-in class for evoke objects
 """
 
-class Baseobject(object):
-  ""
 
-  def permitted(self, user):
-    """ 
+class Baseobject(object):
+    ""
+
+    def permitted(self, user):
+        """ 
     for sub-classing
     
     user.can(self,what), when 'what' is a method, checks this method before checking the user permits.
@@ -13,8 +14,8 @@ class Baseobject(object):
     It is ok to use the user.can(permit) form - indeed this is why the `user` parameter is provided!
     
     """
-    return 1
-    
+        return 1
 
-if __name__=='__main__':
-  pass
+
+if __name__ == '__main__':
+    pass
