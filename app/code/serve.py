@@ -9,10 +9,6 @@ import os
 import sys
 import imp
 
-# Set the encoding to utf-8
-imp.reload(sys)  # needed to expose setdefaultencoding
-sys.setdefaultencoding('utf-8')
-
 # fix the path
 sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(1, os.path.abspath('../..'))
