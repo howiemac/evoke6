@@ -61,13 +61,16 @@ def post_schema_patch(version, app):
 #      p.flush()
 #    print 'PATCH: site prefs patched'
 
+def evoke_version(app):
+    "version number combining major and minor"
+    return app.Config.evoke_major_version*1000000+app.Config.evoke_minor_version
 
 def pre_schema(app):
     "database adjustments prior to loading the schema"
     global version
     print('checking patches for "%s"' % app.Config.appname)
     config = app.Config
-    version = config.evoke_version
+    version = evoke_version(app)
     try:
         res = execute("select * from `%s`.vars where name='evoke-version'" %
                       config.database)
@@ -84,28 +87,27 @@ def pre_schema(app):
         pre_schema_patch(0, config)
         execute(
             "insert into `%s`.vars (name,value,comment) values ('evoke-version',%s,'used for patching')"
-            % (config.database, config.evoke_version))
+            % (config.database, version))
         return
-    version = res[0]['value']
-    if version < config.evoke_version:
+    var_version = res[0]['value']
+    if var_version < version:
         pre_schema_patch(version, config)
-        #set the var textvalue to version number to indicate we are not finished - in case the schema process crashes (so we don't attempt the patch again - safety first!)
+        #set the var textvalue to version number to indicate we are not finished 
+        # - in case the schema process crashes (so we don't attempt the patch again - safety first!)
         execute(
             "update `%s`.vars set value=%s,textvalue='%s' where name='evoke-version'"
-            % (config.database, config.evoke_version,
-               version))  # set the evoke-version (with no schema in place)
+            % (config.database, version, version))
 
 
 def post_schema(app):
     "database adjustments after the schema is loaded"
     global version
-    ##  if hasattr(globals(),'version') and (version<app.Config.evoke_version):
     vars = app.classes['Var']
-    got_version = vars.fetch('evoke-version')
-    z = safeint(got_version.textvalue)
+    var_version = vars.fetch('evoke-version')
+    z = safeint(var_version.textvalue)
     if z:  #if there was a crash after pre-schema patching, z will now contain the version number we were patching to, otherwise z will be 0
         version = z  #reset version to pre-crash version
-    if (version < app.Config.evoke_version):
+    if (var_version.value < evoke_version(app)):
         post_schema_patch(version, app)
     set_version(app)
 
@@ -114,27 +116,28 @@ def set_version(app):
     "updates or adds the evoke-version - requires schema to be in place"
     config = app.Config
     vars = app.classes['Var']
-    version = vars.fetch('evoke-version')
-    if not version.value:
+    var_version = vars.fetch('evoke-version')
+    newversion=evoke_version(app)
+    if not var_version.value:
         vars.add(
             'evoke-version',
-            config.evoke_version,
+            newversion,
             textvalue='valid',
             datevalue='',
             comment='used for patching')  #create version var, dated today
-        print("PATCH:version is %s" % config.evoke_version)
-    elif version.value < config.evoke_version:
+        print("PATCH:version is %s" % newversion)
+    elif var_version.value < newversion:
         vars.amend(
             'evoke-version',
-            config.evoke_version,
+            newversion,
             textvalue='valid',
             datevalue='')  #update version, text and date
-        print("PATCH:version updated to %s" % config.evoke_version)
-    elif version.textvalue != 'valid':
+        print("PATCH:version updated to %s" % newversion)
+    elif var_version.textvalue != 'valid':
         vars.amend(
             'evoke-version', textvalue='valid',
             datevalue='')  #update text and date
-        print("PATCH:version updated to %s" % config.evoke_version)
+        print("PATCH:version updated to %s" % newversion)
 
 
 def do(sql):

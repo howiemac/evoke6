@@ -112,7 +112,7 @@ class App:
 EVOKE version %s.%06d
 Copyright (C) 2017 Evoke Foundation
 All rights reserved.
-""" % (self.Config.evoke_major_version, int(self.Config.evoke_version))
+""" % (self.Config.evoke_major_version, self.Config.evoke_minor_version)
 
         # do any post-schema patching
         patch.post_schema(self)
