@@ -42,7 +42,7 @@ class dispatcherCode(Parser):
         # handle the flat files first
         # note that apache may have already fielded these
         # ( the obsolete "/Resources/" is included for now so that any old links don't break... - IHM 31/10/2014)
-        if uri == "/favicon.ico" or \
+        if uri == b"/favicon.ico" or \
            uri.startswith(b"/site/") or \
            uri.startswith(b"/Resources/") or \
            uri.endswith(b'.html'):

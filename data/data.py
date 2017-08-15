@@ -542,8 +542,8 @@ class MassProducedSQLDataObject(SQLDataObject):
         return [
             int(i[item])
             for i in cls.list(
-                False,
-                "",
+                asObjects=False,
+                sql="",
                 like=like,
                 isin=isin,
                 orderby=orderby,
@@ -566,13 +566,13 @@ class MassProducedSQLDataObject(SQLDataObject):
     """
         what = 'max(%s)' % item
         return cls.list(
-            False,
-            "",
-            like,
-            isin,
-            orderby,
-            where,
-            limit,
+            asObjects=False,
+            sql="",
+            like=like,
+            isin=isin,
+            orderby=orderby,
+            where=where,
+            limit=limit,
             what=what,
             **criteria)[0][what]
 
@@ -589,13 +589,13 @@ class MassProducedSQLDataObject(SQLDataObject):
     """
         what = 'min(%s)' % item
         return cls.list(
-            False,
-            "",
-            like,
-            isin,
-            orderby,
-            where,
-            limit,
+            asObjects=False,
+            sql="",
+            like=like,
+            isin=isin,
+            orderby=orderby,
+            where=where,
+            limit=limit,
             what=what,
             **criteria)[0][what]
 
@@ -612,15 +612,16 @@ class MassProducedSQLDataObject(SQLDataObject):
     """
         what = 'sum(%s)' % item
         return cls.list(
-            False,
-            "",
-            like,
-            isin,
-            orderby,
-            where,
-            limit,
+            asObjects=False,
+            sql="",
+            like=like,
+            isin=isin,
+            orderby=orderby,
+            where=where,
+            limit=limit,
             what=what,
             **criteria)[0][what]
+
 
 # export / import
 

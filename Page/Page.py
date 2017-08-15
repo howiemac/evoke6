@@ -595,17 +595,17 @@ class Page(Image, File):
 
     swap.permit = 'edit page'
 
-    def toggle_mode(self, req):
-        "mode is stored in the cached user object, for permanence"
-        mode = getattr(req.user, "mode", False)
-        print("BEFORE mode=", mode)
-
-        req.user.toggle_mode()
-        print("AFTER mode=", req.user.mode)
-        url = "%s%s" % (req.return_to, req.user.mode and "/edit" or "")
-        return req.redirect(url)
-
-    toggle_mode.permit = "admin page"
+#    def toggle_mode(self, req):
+#        "mode is stored in the cached user object, for permanence"
+#        mode = getattr(req.user, "mode", False)
+#        print("BEFORE mode=", mode)
+#
+#        req.user.toggle_mode()
+#        print("AFTER mode=", req.user.mode)
+#        url = "%s%s" % (req.return_to, req.user.mode and "/edit" or "")
+#        return req.redirect(url)
+#
+#    toggle_mode.permit = "admin page"
 
     ############# navbar #################
 

@@ -42,6 +42,12 @@ th,td {
  padding: .2em .6em;
 }
 
+/* lists */
+ul,ol {
+margin-top: .5em;
+margin-bottom: .5em;
+}
+
 /* images */
 img { 
 margin: 0;

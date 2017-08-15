@@ -119,7 +119,7 @@ class Evo(object):
                 except SyntaxError as inst:
                     p = inst.offset
                     t = inst.text
-                    raise EvoSyntaxError("char %s" % p, 'evo pycode',
+                    raise EvoSyntaxError("char %s" % p, "evo pycode for %s" % self.filename ,
                                          t[max(0, p - 40):p],
                                          t[p:min(p + 40, len(t) - 1)])
         # sort out the wrapper

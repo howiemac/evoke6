@@ -22,6 +22,16 @@ class ImageError(Exception):
 class Image(object):
     ""
 
+    def autostyle(self,scale=100):
+        "return a CSS style to autosize the image for use in evo template"
+        d = self.get_stage_data()
+        w = safeint(d["full_width"])
+        h = safeint(d["full_height"])
+        if (w and h) and (w > h):
+            return "height:%d%%" % (h * scale // w,)
+        else:
+            return "height:%s%%" % scale
+
     def get_pos(self):
         "pos is first word in self.stage"
         return self.get_stage_data()['pos']
