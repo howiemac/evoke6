@@ -7,8 +7,11 @@ if req.searchfor:
     url="%s?searchfor=%s#%s" % (page.url("view"),lib.url_safe(req.searchfor),page.uid) 
     a:href=url
      "%s: " % page.kind
+     # title
+     a: href=page.url('context')
+        span:page.get_name().replace(req.searchfor,"<em>%s</em>" % req.searchfor), cls='big' 
+        span:page.status(full=True), cls='bright wee' 
      when=page.when.nice(long=False)
-     span:page.get_name().replace(req.searchfor,"<em>%s</em>" % req.searchfor),cls='big'
      span: str(when), cls='wee'
      if page.kind=='link':
       a:page.code,  href=page.code, target="_blank"

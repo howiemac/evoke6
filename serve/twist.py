@@ -10,6 +10,8 @@ from twisted.web.resource import Resource
 from twisted.internet import defer
 from twisted.web.server import Session
 from twisted.web.server import NOT_DONE_YET
+from twisted.python.log import ILogObserver, FileLogObserver
+from twisted.python.logfile import DailyLogFile
 
 # try to import resources for gzipping (not available in older twisted versions
 try:
@@ -21,17 +23,8 @@ except ImportError:
     has_gzip = False
 
 from base.serve import respond, Dispatcher
-from twisted.python.log import ILogObserver, FileLogObserver
-from twisted.python.logfile import DailyLogFile
 
 # Twisted interface
-
-# override Session to give us a longer timeout
-
-
-class LongSession(Session):
-    sessionTimeout = 60 * 60  # in seconds
-
 
 class EvokeResource(Resource):
     isLeaf = True
@@ -54,8 +47,11 @@ class EvokeResource(Resource):
         request.finish()
 
 
-application = ""
+# override Session to give us a longer timeout
+class LongSession(Session):
+    sessionTimeout = 60 * 60  # in seconds
 
+application = ""
 
 def start(application, apps=[]):
     "start a twisted instance"
@@ -63,17 +59,14 @@ def start(application, apps=[]):
     # attach the service to its parent application
     resource = EvokeResource()
     resource.evokeDispatcher = dispatcher
-
+    # serve gzipped content if we can..
     if has_gzip:
-        # serve gzipped content
-        wrapped = EncodingResourceWrapper(resource, [GzipEncoderFactory()])
-        fileServer = server.Site(wrapped)
-    else:
-        # serve plain content
-        fileServer = server.Site(resource)
-
-    fileServer.sessionFactory = LongSession  # use long session
-    #  evokeService=internet.TCPServer(int(dispatcher.apps['port']),fileServer)
+        resource = EncodingResourceWrapper(resource, [GzipEncoderFactory()])
+    # set up our server
+    fileServer = server.Site(resource)
+    # use long session
+    fileServer.sessionFactory = LongSession 
+    # start the service
     port = int(list(dispatcher.apps.values())[0]['Config'].port)
     evokeService = internet.TCPServer(port, fileServer)
     evokeService.setServiceParent(application)
