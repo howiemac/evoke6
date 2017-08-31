@@ -48,11 +48,14 @@ form: action=self.url("edit_image"), cls="form-horizontal", role="form"
 #        input: type="hidden", name="filename", value=""
 #    button:'save', onclick="javascript:form.filename.value=form.filedata.value;confirmExit = false",accesskey="S", cls="btn btn-default"
 
-  #/fieldset
-  button:'save', onclick="confirmExit = false",accesskey="S", cls="btn btn-primary"
-  a:'delete', role="button", href=self.url("remove_image"), cls="btn btn-default", onclick="return confirm('are you sure you wish to delete this image?')"
+    button:'save', onclick="confirmExit = false",accesskey="S", cls="btn btn-primary"
+    #/fieldset
+
+#  a:'delete', role="button", href=self.url("remove_image"), cls="btn btn-default", onclick="return confirm('are you sure you wish to delete this image?')"
 #/form
-#form: action=self.url("remove_image"), onclick="return confirm('are you sure you wish to delete this image?')"
-#    button:'delete', onclick="confirmExit = false", cls="btn btn-default"
-div:
-  a: "...back", href=self.url()
+form: action=self.url("remove_image"), onclick="return confirm('are you sure you wish to delete this image?')"
+#  fieldset:
+#    legend: "delete this image"    
+    button:'delete', onclick="confirmExit = false", cls="btn btn-default"
+#div:
+#  a: "...back", href=self.url()

@@ -65,7 +65,7 @@ def start(application, apps=[]):
     # set up our server
     fileServer = server.Site(resource)
     # use long session
-    fileServer.sessionFactory = LongSession 
+    fileServer.sessionFactory = LongSession
     # start the service
     port = int(list(dispatcher.apps.values())[0]['Config'].port)
     evokeService = internet.TCPServer(port, fileServer)

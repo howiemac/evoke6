@@ -99,7 +99,7 @@ class App:
         for targetid, targetcls in classes:
             if targetcls.__name__ != 'Config':
                 for sourceid, sourcecls in classes:
-                    if sourceid != targetid:  # don't do self-linkage   #### TODO - define why not?
+#                    if sourceid != targetid:  # don't do self-linkage   #### TODO - define why not?
                         setattr(targetcls, sourceid, sourcecls)
             # make classes available in globals (mostly for interactive testing)
             globals()[targetid] = targetcls
