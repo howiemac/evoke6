@@ -6,7 +6,7 @@ a decorator to create simple calling functions for Evo (See evo.py)
 
 from re import compile
 #from inspect import stack
-from base.render.evo import Evo
+from base.render.evo import Evo, EvoTemplateNotFound
 import gettext
 import os
 
@@ -72,8 +72,11 @@ class Html(object):
                     self.template_cache[template_name] = template
                 try:
                     return template(inner_self, req, gettext=lang)
-                except OSError:
+#                except OSError:
+                except EvoTemplateNotFound:
                     pass
+                except:
+                    raise
             # no template found in the hierarchy
             raise TemplateNotFound([
                 '%s_%s.evo' % (klass_name, fname) for klass_name in klass_names
