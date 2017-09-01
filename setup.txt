@@ -1,0 +1,52 @@
+state of play
+==
+
+{ python3 setup.py bdist_wheel }
+
+The above creates a wheel in the {dist} folder. (also creates {build} folder and {evoke.egg-info} folder).
+
+issues with setup.py
+==
+- setup.py has to be a level above base (ie in evoke folder)
+- it creates a package in python site-packages called "base" 
+
+=> rename base to evoke ?
+
+
+issues with app folder
+==
+- no empty data folder in app
+- no site folder in app - will have to do away with symbolic links...
+
+=> create-app script and app folders (especially those involving symlinks)  need a rethink
+
+
+virtualenv
+==
+In the virtualenv:
+- all of the code is in lib/python3.6/site_packages/base (as is app, and evo code)
+- site data is in site
+
+
+other issues
+==
+- imports will change...
+- all references to data will probably change
+- there will be a dichotomy between development code and deployed code
+  - the git repo holds the development code
+    - including setup.py (even if in the wrong location)
+  - how about we use a temporary build folder for creating the wheel:
+     - copy required base (or evoke) folder into it
+     - copy the site folder into it
+     - copy the scripts into it
+     - link to the setup.py
+
+o/s: apps
+==
+These will also be installed similarly to site_packages etc via their own wheels - same issues will arise:
+- location of setup.py
+- problems with symbolic links
+- imports will change
+- all references to data will probably change
+- issues with nested git repos, if we extend the evoke repo to include the enclosing folder...
+  - BUT: no reason (other than existing symlink setup, which has to be changed anyway) to locate apps within evoke enclosing folder
