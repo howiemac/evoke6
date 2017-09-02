@@ -38,6 +38,15 @@ def site_files():
 #    print(dirpath,filenames)
   return files
 
+## find all of the files in a given directory tree
+#def files(where):
+#  tree=walk(where)
+#  files=[]
+#  for (dirpath,dirnames,filenames) in tree:
+#    for f in filenames:
+#      files.append(dirpath+'/'+f)
+#  return files
+
 # the main setup:
 setup(
     name='evoke',
@@ -84,7 +93,6 @@ setup(
     packages=[
     'evoke',
     'evoke.app',
-    'evoke.app.code',
     'evoke.data',
     'evoke.lib',
     'evoke.render',
@@ -125,7 +133,7 @@ setup(
           'config_multi.py.example','config_site.py.example',
           'README.md','LICENSE'
           ],
-        'evoke.app.code': ['config_site.py.example'],
+        'evoke.app': ['config_site.py.example'],
     },
 
 #    package_data={

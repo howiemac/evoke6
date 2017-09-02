@@ -1,3 +1,9 @@
+PACKAGING ISSUES
+==
+- logs currently being written to a log directory created wherever evoke is called from... They should have a standard location eg var/log/<appname>.
+
+
+
 BUG
 ==
 - data.list() cannot cope with a "where" parameter for any word(s) starting with s - eg where="%%star%%"
