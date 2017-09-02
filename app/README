@@ -1,5 +1,8 @@
-This is the deepserver clone app, as used by the evoke/clone_app script as the basis for a new app
+This is the evoke clone app, as used by the evoke/clone_app script as the basis for a new app
 
-code: twisted evoke app
-htdocs: flat files
+Each evoke clone app is also itself a twisted application.
+
+The site/app folder contains whatever flat files are to be served by twisted/evoke.
+
+Before starting this app, you will need a config_site.py - refer to the config_site.py.example.
 

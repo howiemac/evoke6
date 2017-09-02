@@ -9,10 +9,10 @@ link: rel="stylesheet", type="text/css",  href="/site/evoke/bootstrap/css/bootst
 script: src="/site/evoke/bootstrap/js/bootstrap.min.js", type="text/javascript"
 
 # Evoke
-link: rel="stylesheet", type="text/css" ,href="/site/evoke/css/evoke.css" 
+link: rel="stylesheet", type="text/css" ,href="/site/evoke/css/evoke.css"
 script: src="/site/evoke/js/evoke.js"
 
-# App
-link: rel="stylesheet", type="text/css" , href="/site/css/app.css" 
-script: src="/site/js/app.js", type="text/javascript"
+## App (these should be added via wrapper_head_resources_hook.evo override in the app's evo directory)
+#link: rel="stylesheet", type="text/css" , href="/site/%s/css/app.css" % appname
+#script: src="/site/%s/js/app.js" % appname, type="text/javascript"
 
