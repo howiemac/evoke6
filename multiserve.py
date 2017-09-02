@@ -1,8 +1,5 @@
 """
-evoke base server script, for Twisted 
-
-This is the multi-app server 
-
+evoke mutli-app server script, for Twisted 
 """
 
 #fix the path
@@ -12,7 +9,7 @@ sys.path.append(
 sys.path.append(os.path.abspath('..'))
 
 from twisted.application import service
-from base.serve import start
+from evoke.serve import start
 from config_multi import apps
 
 ## Twisted requires the creation of the root-level application object to take place in this file

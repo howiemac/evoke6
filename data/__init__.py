@@ -1,5 +1,5 @@
 """
-evoke base database interface
+evoke database interface
 """
 
 from .data import makeDataClass, RecordNotFoundError

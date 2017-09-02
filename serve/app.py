@@ -20,8 +20,8 @@ from inspect import isclass
 from os.path import lexists, split
 from os import getcwd
 from sys import modules
-from base.data import init_db, makeDataClass, schema
-from base.data import schema, patch
+from evoke.data import init_db, makeDataClass, schema
+from evoke.data import schema, patch
 
 
 class App:
@@ -40,28 +40,28 @@ class App:
         self.app_path = app and ("%s.code." % app) or ''
         if app:  #multiserve
             self.app_filepath = '../%s/code/' % app
-            base_filepath = ''  # i.e. base folder, where multiserve.py is called from
+            evoke_filepath = ''  # i.e. evoke folder, where multiserve.py is called from
             htdocs_filepath = '../%s/htdocs/' % app
         else:  # single app
             self.app_filepath = ''  # i.e. the app folder, where single serve.py is called from
-            base_filepath = '../../base/'
+            evoke_filepath = '../../evoke/'
             htdocs_filepath = '../htdocs/'
 #    print ">>>>>>>>>>>>>>>>> app filepath: ",self.app_filepath
-#    print ">>>>>>>>>>>>>>>>> base filepath: ",base_filepath
+#    print ">>>>>>>>>>>>>>>>> evoke filepath: ",evoke_filepath
 
 # build the schemaClasses and config dictionaries - siteconfig overrides config, which in turn overides baseconfig
         self.schemaClasses = {}
         self.config = dict(
             app=app,
             app_filepath=self.app_filepath,
-            base_filepath=base_filepath,
+            evoke_filepath=evoke_filepath,
             htdocs_filepath=htdocs_filepath)
-        self.get_config('config_base', 'base.')
-        self.get_config('config_site', 'base.')
+        self.get_config('config_base', 'evoke.')
+        self.get_config('config_site', 'evoke.')
         self.get_config('config', self.app_path)
         self.get_config('config_site', self.app_path)
         if app:  #we have multiserve...
-            self.get_config('config_multi', 'base.')
+            self.get_config('config_multi', 'evoke.')
 
 #    print "SCHEMA======>"
 #    for k,v in self.schemaClasses.items():
@@ -147,12 +147,12 @@ All rights reserved.
             c.build_database(self.Config.database)
             klass = c.__name__.capitalize(
             )  #force capitalisation for class / object names - consistent, and avoids naming conflicts with methods, keywords etc
-            # look for the py file locally first, if not there then it must be in base
+            # look for the py file locally first, if not there then it must be in evoke
             if lexists(self.app_filepath + klass + '.py') or lexists(
                     self.app_filepath + klass):  #allow for py file or folder
                 module = self.app_path + klass
             else:
-                module = 'base.' + klass
+                module = 'evoke.' + klass
             self.make_object(k, module, klass, c)
 #      print k,':',self.classes[k],self.classes[k].____
 
@@ -163,7 +163,7 @@ All rights reserved.
         #    print (">>>>>>>>>>>>>>>>>>>",id,klass,module ,schemaClass._v_columns)
         bases.append(
             getattr(__import__(module, globals(), locals(), klass),
-                    klass))  #yuk... but it works...for base.module.klass too
+                    klass))  #yuk... but it works...for evoke.module.klass too
         if schemaClass._v_columns or schemaClass.table:  # DataObject
             bases.append(makeDataClass(schemaClass))
         bases.extend(

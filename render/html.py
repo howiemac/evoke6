@@ -6,7 +6,7 @@ a decorator to create simple calling functions for Evo (See evo.py)
 
 from re import compile
 #from inspect import stack
-from base.render.evo import Evo, EvoTemplateNotFound
+from evoke.render.evo import Evo, EvoTemplateNotFound
 import gettext
 import os
 

@@ -22,7 +22,7 @@ except ImportError:
     print("no gzip encoding available")
     has_gzip = False
 
-from base.serve import respond, Dispatcher
+from evoke.serve import respond, Dispatcher
 
 # Twisted interface
 

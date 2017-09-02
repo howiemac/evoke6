@@ -27,8 +27,8 @@ except ImportError:
 # local imports
 from .File import File
 from .Image import Image
-from base.render import html
-from base.lib import *
+from evoke.render import html
+from evoke.lib import *
 
 
 class Page(Image, File):
@@ -843,9 +843,7 @@ class Page(Image, File):
 
     def delete_branch(self):
         "branch deletion - self and ALL child pages of any kind (the whole branch!) are deleted"
-        deletes = []
         for p in self.get_branch():
-            deletes.append(p.uid)
             if p.kind == 'image':
                 self.get(p.uid).delete_image()
             else:
@@ -1370,7 +1368,7 @@ class Page(Image, File):
 
     ################ templates for mix-in classes ##############
     #
-    # These are here for now, as base.render.html() uses the last item in the module name to
+    # These are here for now, as evoke.render.html() uses the last item in the module name to
     #  obtain the template name...
     # Note that the __module__ for an @html function declared in Image.py will be "Page.Image",
     #  so it would be possible to derive "Page" from that....

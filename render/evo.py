@@ -32,7 +32,7 @@ from os.path import lexists
 import sys
 from gettext import gettext
 
-from base import lib
+from evoke import lib
 
 # EVO error handling
 
@@ -83,7 +83,7 @@ class Evo(object):
         self.key = ob.Config.app + '.' + self.filename
         self.path = self.pathcache.get(self.key, "")
         if not self.path:  # first time only.. get the paths
-            # note: we couldn't do this earlier, as we lacked the base and app filepaths
+            # note: we couldn't do this earlier, as we lacked the evoke and app filepaths
             # firstly: use the local class template, if there is one
             klass = self.filename.split("_", 1)[0]
             self.path = '%s%s/evo/%s' % (ob.Config.app_filepath, klass,
@@ -91,13 +91,13 @@ class Evo(object):
             # otherwise, is there a local template?
             if not lexists(self.path):
                 self.path = ob.Config.app_filepath + 'evo/' + self.filename
-                # otherwise, is there a class template in base?
+                # otherwise, is there a class template in evoke (base)?
                 if not lexists(self.path):
-                    self.path = '%s%s/evo/%s' % (ob.Config.base_filepath,
+                    self.path = '%s%s/evo/%s' % (ob.Config.evoke_filepath,
                                                  klass, self.filename)
-                    # otherwise, use the base template
+                    # otherwise, use the evoke template
                     if not lexists(self.path):
-                        self.path = ob.Config.base_filepath + 'evo/' + self.filename
+                        self.path = ob.Config.evoke_filepath + 'evo/' + self.filename
                         # if that doesn't exist, raise an error
                         if not lexists(self.path):
                             raise EvoTemplateNotFound(self.filename)

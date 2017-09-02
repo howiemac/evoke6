@@ -6,7 +6,7 @@ evoke MySQL database interface:
 """
 
 from .schema import *
-from base.lib import Permit
+from evoke.lib import Permit
 from time import time
 from pickle import loads, dumps
 
@@ -384,7 +384,7 @@ class MassProducedSQLDataObject(SQLDataObject):
 
     #  # `what` parameter DEPRECATED CJH 20130408  ( WHY? IHM 20141111)
     #  if what !='*':
-    #    print "DEPRECATED: base.data.list `what` parameter is deprecated"
+    #    print "DEPRECATED: evoke.data.list `what` parameter is deprecated"
 
     # sql overrides all other parameters except sqlargs
         if sql:

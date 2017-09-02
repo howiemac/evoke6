@@ -4,8 +4,8 @@
 from datetime import datetime, timedelta
 import uuid
 
-from base.render import html
-from base.lib import email
+from evoke.render import html
+from evoke.lib import email
 
 
 class Reset(object):

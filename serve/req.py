@@ -1,5 +1,5 @@
 """
-evoke base request object
+evoke request object
 """
 import sys
 import time
@@ -18,7 +18,7 @@ from zope.interface import Interface, implementer
 from twisted.python.components import registerAdapter
 from twisted.web.server import Session
 
-from base.lib import DATE, httpDate
+from evoke.lib import DATE, httpDate
 
 
 class ISessionCache(Interface):

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-config file for base items
+foundation (base) config file for evoke
 
 used whether running single app or multi app
 
@@ -16,15 +16,15 @@ evoke_minor_version=6 # minor code version - do not play with this unless you ar
 # the following are set in serve/app.py and can be used but not should not be overridden - they are here for information only:
 # copyright= ... # this message is shown on the console log on startup
 # app_filepath= ...
-# base_filepath= ...
+# evoke_filepath= ...
 # htdocs_filepath= ...
 
 # the following MUST be provided in an app's config.py or config_site.py
 domains = ["127.0.0.1"]  # eg ['versere.com','www.versere.com']
 domain = ''  #if not provided,  this is set to domains[0] by serve/app.py
 
-# the following is typically overridden in base/config_site.py
-connect = '127.0.0.1 base 123456'  #database connection parameters - normally only required here
+# the following is typically overridden in evoke/config_site.py
+connect = '127.0.0.1 evoke 123456'  #database connection parameters - normally only required here
 
 # the following are likely to be overridden in an app's config.py or config_site.py
 urlpath = '/evoke'  # must have a preceding "/", or else be ""
@@ -47,7 +47,7 @@ meta_keywords = "evoke,web,application,engine,python,mysql,twisted"
 database = ''  #this will default to app name
 port = '8080'  #for multiserve, this MUST be put in config_multi.py, to override any app settings
 
-#the following applies only to base_multi.py, and MUST be set in base/config_multi.py
+#the following applies only to evoke/config_multi.py and must be set there
 apps = []
 
 #the following data schema may be subclassed or overidden in an app's config.py

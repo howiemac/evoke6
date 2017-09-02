@@ -1,4 +1,4 @@
 """
-evoke system base (i.e. foundation) 
+evoke system base / foundation library
 
 """

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-config file for base.Session (used by User)
+config file for evoke.Session (used by User)
 """
 
-from base.data.schema import *
+from evoke.data.schema import *
 
 
 class Session(Schema):

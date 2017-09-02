@@ -4,7 +4,7 @@
 
       trial test_DB.py
 
-    In the context of base, and by extension the rest of Evoke
+    In the context of evoke, and by extension in evoke apps,
     only init_db and execute are used by external functions.
 
     The aim of the current exercise is to maintain the current interface

@@ -1,6 +1,6 @@
 """a setuptools based setup module.
 
-THIS HAS TO BE COPIED TO FOLDER THAT CONTAINS BASE, before executing (from there):
+THIS HAS TO BE COPIED TO DIRECTORY THAT CONTAINS the evoke (base) directory, before executing (from there):
 
  python3 setup.py bdist_wheel
 
@@ -24,12 +24,12 @@ from os import path, walk
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-with open(path.join(here, 'base/README.md')) as f:
+with open(path.join(here, 'evoke/README.md')) as f:
     long_description = f.read()
 
 # find all of the site data files
 def site_files():
-  tree=walk('base/site')
+  tree=walk('evoke/site')
   files=[]
   for (dirpath,dirnames,filenames) in tree:
     if filenames:
@@ -82,20 +82,20 @@ setup(
     # simple. Or you can use find_packages().
 #    packages=find_packages(exclude=[]),
     packages=[
-    'base',
-    'base.app',
-    'base.app.code',
-    'base.data',
-    'base.lib',
-    'base.render',
-    'base.serve',
-    'base.Page',
-    'base.Permit',
-    'base.Reset',
-    'base.Session',
-    'base.User',
+    'evoke',
+    'evoke.app',
+    'evoke.app.code',
+    'evoke.data',
+    'evoke.lib',
+    'evoke.render',
+    'evoke.serve',
+    'evoke.Page',
+    'evoke.Permit',
+    'evoke.Reset',
+    'evoke.Session',
+    'evoke.User',
     ],
-    #+find_packages(where='base',exclude=[]),
+    #+find_packages(where='evoke',exclude=[]),
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:
@@ -120,10 +120,10 @@ setup(
     #},
     package_data={
         '': ['evo/*.evo'],
-        'base.app.code': ['devstart','restart','start','stop'],
+        'evoke.app.code': ['devstart','restart','start','stop'],
         '': ['site'],
-#        'base.Page':['evo/*.evo'],
-#        'base.User':['evo/*.evo'],
+#        'evoke.Page':['evo/*.evo'],
+#        'evoke.User':['evo/*.evo'],
     },
 
     # Although 'package_data' is the preferred approach, in some case you may
@@ -133,8 +133,8 @@ setup(
     # data_files=[('my_data', ['data/data_file'])],
     data_files=site_files(),
 #    [
-#        ('site/css', ['base/site/css/base.css']),
-#        ('site/js', ['base/site/js/base.js']),
+#        ('site/css', ['evoke/site/css/evoke.css']),
+#        ('site/js', ['evoke/site/js/evoke.js']),
 #    ],
 
     # To provide executable scripts, use entry points in preference to the

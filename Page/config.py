@@ -3,7 +3,7 @@ config file for Page
 
 """
 
-from base.data.schema import *
+from evoke.data.schema import *
 
 # the following are defaults and should not be removed - they are likely to be overridden in an app's config.py or config_site.py
 ratings = True  # can pages be rated? valid values are False, True, and "admin" (only page admins see/set ratings)

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-config file for base.Reset  (used by base.User)
+config file for evoke.Reset  (used by evoke.User)
 """
 
-from base.data.schema import *
+from evoke.data.schema import *
 
 
 class Reset(Schema):

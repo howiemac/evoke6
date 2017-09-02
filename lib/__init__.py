@@ -5,7 +5,7 @@ evoke library type interface
 (IHM April 2017)
 """
 
-#make everything visible as base.lib.types
+#make everything visible as evoke.lib.types
 from .INT import INT, SMALLINT, TINYINT
 from .FLOAT import FLOAT
 from .STR import TAG, STR, CHAR

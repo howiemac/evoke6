@@ -1,4 +1,4 @@
-""" evoke base User object
+""" evoke User object
 
 IHM 2/2/2006 and thereafter
 CJH 2012 and therafter
@@ -27,8 +27,8 @@ import uuid
 import hashlib
 from base64 import urlsafe_b64encode as encode, urlsafe_b64decode as decode
 
-from base import lib
-from base.render import html
+from evoke import lib
+from evoke.render import html
 
 
 class User:

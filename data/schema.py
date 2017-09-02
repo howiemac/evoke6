@@ -12,7 +12,7 @@ class Widget:
   ... etc                     #as many as you like
   insert=[dict(name='whatever',number=123),dict(name="something",number=456)] #seed data (columns) for the table
 
-The above definition implies (and requires) that there is a class called Widget in a module called Widget.py in the app code folder, or in the base folder.
+The above definition implies (and requires) that there is a class called Widget in a module called Widget.py in the app code directory, or in the evoke directory.
 
 A schema class can be subclassed, eg to give a different class which uses the same database table (or indeed a different table with the same schema, or a modified version of it)
 
@@ -29,7 +29,7 @@ if __name__ == '__main__':
     sys.path.append(os.path.abspath('..'))
     from lib import TAG, STR, CHAR, TEXT, INT, SMALLINT, TINYINT, FLOAT, DATE, FLAG, MONEY, TIME, REL, BLOB, sql_list, Error
 else:
-    from base.lib import TAG, STR, CHAR, TEXT, INT, SMALLINT, TINYINT, FLOAT, DATE, FLAG, MONEY, TIME, REL, BLOB, sql_list, Error
+    from evoke.lib import TAG, STR, CHAR, TEXT, INT, SMALLINT, TINYINT, FLOAT, DATE, FLAG, MONEY, TIME, REL, BLOB, sql_list, Error
     from .DB import execute
 
 

@@ -9,7 +9,7 @@
       ...
 
    extend with @Condition to allow checks to be made on an
-   object's state at base.serve.dispatch.doMethod time
+   object's state at evoke.serve.dispatch.doMethod time
 
    eg.
 
@@ -23,7 +23,7 @@
    def fn():
      ...
 
-   to reflect the parameter patterns of base.data.list
+   to reflect the parameter patterns of evoke.data.list
 """
 
 

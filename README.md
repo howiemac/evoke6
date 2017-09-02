@@ -9,9 +9,9 @@ installation
 O/S: proper installation script to be written
 
 for now:
-- name the folder containing this code to "base"
+- name the folder containing this code to "evoke"
 - use create_app script to create an app (say "yourapp"): 
- - app will be created in a sibling folder to base/
+ - app will be created in a sibling folder to evoke/
  - cd to yourapp/code
  - ./start
 

@@ -1,23 +1,15 @@
 BUG
 ==
 - data.list() cannot cope with a "where" parameter for any word(s) starting with s - eg where="%%star%%"
-  eg see base.Page.page.py line 1152: heads.extend(self.list(where='name like "%%%s%%"' % term,orderby='uid desc'))
-  because of base.data.py line  402:  whereclauses = (' and '.join(sqlparts)).replace("%","%%").replace('%%s','%s') # double the % wildcard (but not any %s)
+  eg see evoke.Page.page.py line 1152: heads.extend(self.list(where='name like "%%%s%%"' % term,orderby='uid desc'))
+  because of evoke.data.py line  402:  whereclauses = (' and '.join(sqlparts)).replace("%","%%").replace('%%s','%s') # double the % wildcard (but not any %s)
   i.e. The substitution of "%%s" is a bodge too far! REVERT TO PRE - SQL INJECTION PROTECTION data.py (ie as per grace 8)
 CURRENTLY BODGED BY FORCING UPPERCASE FOR SEARCH TERM IN THIS PARTICULAR EXAMPLE.....
-
-URGENT
-==
-- rename "base" folder to "evoke"
-- move / copy
-- user mode
 
 
 LATER
 ==
 - import/export
-
-- replace req.req and url.req with the new mp.base versions...
 
 - should there be a base EvoType object, even if it only has the __hash__ declaration in it.. ?
 

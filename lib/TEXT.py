@@ -183,7 +183,7 @@ class TEXT(STR):
 
         def sublink(match):
             """deal with [page-uid] or [url] or [page-uid caption] or [url caption]
-         O/S - SPECIFIC to Page.py - SHOULD NOT BE IN base ???
+         O/S - SPECIFIC to Page.py - SHOULD NOT BE IN evoke (base) ???
          ugly stuff - maybe could be done better with more use of regex, methinks....
          BUT it does work and is clever enough....
          urls matched here will not be matched subsequently because they will be have been enclosed in parenthesis by link()

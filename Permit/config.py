@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-config file for base.Permit  
+config file for evoke.Permit  
 """
 
-from base.data.schema import *
+from evoke.data.schema import *
 
 # the following are likely to be overridden in an app's User/config.py
 guests = False  # do guests have access by default?

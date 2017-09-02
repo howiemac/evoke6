@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-config file for base.User
+config file for evoke.User
 
 configuration value here act as defaults, so NO PARAMETER SHOULD BE REMOVED 
 """
 
-from base.data.schema import *
+from evoke.data.schema import *
 
 # the following are likely to be overridden in an app's User/config.py
 registration_method = "admin"  # options are: "self" : (the default) online self registration with email confirmation

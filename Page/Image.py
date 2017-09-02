@@ -10,8 +10,8 @@ import imghdr
 
 from PIL import Image as pim
 
-from base.render import html
-from base.lib import *
+from evoke.render import html
+from evoke.lib import *
 
 
 class ImageError(Exception):

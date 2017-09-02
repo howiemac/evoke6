@@ -1,5 +1,5 @@
 """
-evoke base server interface
+evoke server interface
 """
 
 from .dispatch import Dispatcher

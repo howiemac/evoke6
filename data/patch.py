@@ -6,7 +6,7 @@
 """
 
 from .DB import execute
-from base.lib import Error, safeint
+from evoke.lib import Error, safeint
 
 
 class InvalidDatabaseError(Error):

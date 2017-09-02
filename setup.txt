@@ -7,10 +7,8 @@ The above creates a wheel in the {dist} folder. (also creates {build} folder and
 
 issues with setup.py
 ==
-- setup.py has to be a level above base (ie in evoke folder)
-- it creates a package in python site-packages called "base" 
-
-=> rename base to evoke ?
+- setup.py has to be a level above evoke (ie in the enclosing folder)
+- it creates a package in python site-packages called "evoke" 
 
 
 issues with app folder
@@ -24,7 +22,7 @@ issues with app folder
 virtualenv
 ==
 In the virtualenv:
-- all of the code is in lib/python3.6/site_packages/base (as is app, and evo code)
+- all of the code is in lib/python3.6/site_packages/evoke (as is app, and evo code)
 - site data is in site
 
 
@@ -35,11 +33,10 @@ other issues
 - there will be a dichotomy between development code and deployed code
   - the git repo holds the development code
     - including setup.py (even if in the wrong location)
-  - how about we use a temporary build folder for creating the wheel:
-     - copy required base (or evoke) folder into it
-     - copy the site folder into it
-     - copy the scripts into it
-     - link to the setup.py
+
+o/s scripts
+==
+start-up scripts should be included (but are not, except for those in the app folder, which may be enough if we are not using multiserve..)
 
 o/s: apps
 ==

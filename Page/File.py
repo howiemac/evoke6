@@ -4,8 +4,8 @@ Files - a Page kind - used in pages/sections, as download links
 mix-in class for Page.py
 """
 
-from base.render import html
-from base.lib import *
+from evoke.render import html
+from evoke.lib import *
 
 from io import StringIO
 from os.path import lexists
