@@ -1,7 +1,5 @@
-this is the deepserver clone app: it should be copied to the same folder level as evoke, renamed, and used as a basis for a new app  
+This is the deepserver clone app, as used by the evoke/clone_app script as the basis for a new app
 
-code : twisted app
+code: twisted evoke app
 htdocs: flat files
 
-
-currently UNTESTED ad INCOMPLETE - IHM 30/3/7

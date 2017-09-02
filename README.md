@@ -6,13 +6,17 @@ EVOKE is a simple and powerful python web framework with pythonic "evo" templati
 
 installation
 ==
-O/S: proper installation script to be written
+O/S: proper installation package is currently in development..
 
 for now:
 - name the folder containing this code to "evoke"
-- use create_app script to create an app (say "yourapp"): 
+- use create_app script to create an app (say "yourapp"):
+
+    create_app yourapp
+
  - app will be created in a sibling folder to evoke/
  - cd to yourapp/code
+ -  create a config_site.py file, similar to config_site.example, with your local settings
  - ./start
 
 contents

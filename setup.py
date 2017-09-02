@@ -1,6 +1,6 @@
 """a setuptools based setup module.
 
-THIS HAS TO BE COPIED TO DIRECTORY THAT CONTAINS the evoke (base) directory, before executing (from there):
+THIS HAS TO BE COPIED (or symlinked) TO THE DIRECTORY THAT CONTAINS the evoke directory, before executing (from there):
 
  python3 setup.py bdist_wheel
 
@@ -119,12 +119,32 @@ setup(
     #    'sample': ['package_data.dat'],
     #},
     package_data={
-        '': ['evo/*.evo'],
-        'evoke.app.code': ['devstart','restart','start','stop'],
-        '': ['site'],
+        '': ['evo/*.evo']+['devstart','restart','start','stop','README'],
+        'evoke': [
+          'create_app',
+          'config_multi.py.example','config_site.py.example',
+          'README.md','LICENSE'
+          ],
+        'evoke.app.code': ['config_site.py.example'],
+    },
+
+#    package_data={
+#        'evoke': ['evo/*.evo']+[
+#          'create_app',
+#          'devstart','restart','start','stop',
+#          'config_multi.py.example','config_site.py.example',
+#          'README.md','LICENSE'
+#          ],
+#        'evoke.app': ['README'],
+#        'evoke.app.code': [
+#          'README',
+#          'config_site.py.example',
+#          'devstart','restart','start','stop',
+#          ],
 #        'evoke.Page':['evo/*.evo'],
 #        'evoke.User':['evo/*.evo'],
-    },
+#    },
+
 
     # Although 'package_data' is the preferred approach, in some case you may
     # need to place data files outside of your packages. See:
