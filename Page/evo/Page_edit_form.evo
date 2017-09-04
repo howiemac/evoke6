@@ -24,9 +24,6 @@ div: id="content", cls="%s_content" % self.kind.replace(" ","_")
             label: "content", for_id="text", cls="col-md-1"
             div: cls="col-md-11"
               textarea:self.text, cls="form-control", id="text", name="text", onChange="confirmExit = true;", onKeyPress="confirmExit = true;"
-#              textarea:self.text, cls="form-control", id="text", name="text", rows=8, onKeyUp="sizeArea(this);", onLoad="sizeArea(this);", onChange="confirmExit = true;", onKeyPress="confirmExit = true;"
-#            script:"sizeArea(document.getElementById('text'));"
-#            script:"$('textarea').autosize();"
         # save / post buttons ###############
         div: cls='edithead row'
          div: cls='col-md-2'
