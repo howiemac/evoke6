@@ -68,7 +68,7 @@ class File(object):
 
     def file_loc(self, name=''):
         "file location"
-        return '%ssite/data/%s/%s' % (self.Config.htdocs_filepath,
+        return '%sdata/%s/%s' % (self.Config.site_filepath,
                                       self.file_folder(), name or self.code)
 
     def file_folder(self):
@@ -83,7 +83,7 @@ class File(object):
 
     def filedata(self, folder='', name=''):
         "return file data as bytes - generic, used also for images"
-        d = '%ssite/data/%s' % (self.Config.htdocs_filepath,
+        d = '%sdata/%s' % (self.Config.site_filepath,
                                 folder or self.file_folder())
         fp = '%s/%s' % (d, name or self.code)
         try:
@@ -95,7 +95,7 @@ class File(object):
     def save_file(self, content, folder="", name=''):
         "save actual file in filesystem - generic, used also for images"
         folders = folder or self.file_folder()
-        datapath = '%ssite/data' % self.Config.htdocs_filepath
+        datapath = '%sdata' % self.Config.site_filepath
         fp = '%s/%s/%s' % (datapath, folders, name or self.code)
         try:
             f = open(fp, 'wb')

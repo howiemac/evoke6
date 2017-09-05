@@ -13,11 +13,16 @@ from .data.schema import *
 evoke_major_version=5 # do not change this - odd numbers are development, even numbers are stable
 evoke_minor_version=6 # minor code version - do not play with this unless you are SURE you know what you are doing....
 
-# the following are set in serve/app.py and can be used but not should not be overridden - they are here for information only:
+# the following are set in serve/app.py and can be used but not should NOT be overridden - they are here for information only:
 # copyright= ... # this message is shown on the console log on startup
 # app_filepath= ...
+
+# the following is set in evoke/__init__.py and should NOT be overridden
 # evoke_filepath= ...
-# htdocs_filepath= ...
+
+# the following should generally be overridden in each app's config_site
+# (note that a folder with the same name as the app will be automatically appended, for each app)
+site_filepath="site/"
 
 # the following MUST be provided in an app's config.py or config_site.py
 domains = ["127.0.0.1"]  # eg ['versere.com','www.versere.com']

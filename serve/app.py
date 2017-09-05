@@ -18,8 +18,9 @@ from .url import Url
 from .baseobject import Baseobject
 from inspect import isclass
 from os.path import lexists, split
-from os import getcwd
-from sys import modules
+from os import getcwd 
+from sys import modules,path
+from evoke import evoke_filepath
 from evoke.data import init_db, makeDataClass, schema
 from evoke.data import schema, patch
 
@@ -40,39 +41,25 @@ class App:
         self.app_path = app and ("%s.code." % app) or ''
         if app:  #multiserve
             self.app_filepath = '../%s/code/' % app
-            evoke_filepath = ''  # i.e. evoke folder, where multiserve.py is called from
-            htdocs_filepath = '../%s/htdocs/' % app
         else:  # single app
             self.app_filepath = ''  # i.e. the app folder, where single serve.py is called from
-            evoke_filepath = '../../evoke/'
-            htdocs_filepath = '../htdocs/'
-#    print ">>>>>>>>>>>>>>>>> app filepath: ",self.app_filepath
-#    print ">>>>>>>>>>>>>>>>> evoke filepath: ",evoke_filepath
-
-# build the schemaClasses and config dictionaries - siteconfig overrides config, which in turn overides baseconfig
+#        print (">>>>>>>>>>>>>>>>> app filepath: ",self.app_filepath)
+#        print (">>>>>>>>>>>>>>>>> evoke filepath: ",evoke_filepath)
+        # build the schemaClasses and config dictionaries - siteconfig overrides config, which in turn overides baseconfig
         self.schemaClasses = {}
         self.config = dict(
             app=app,
             app_filepath=self.app_filepath,
-            evoke_filepath=evoke_filepath,
-            htdocs_filepath=htdocs_filepath)
+            evoke_filepath=evoke_filepath)
         self.get_config('config_base', 'evoke.')
         self.get_config('config_site', 'evoke.')
         self.get_config('config', self.app_path)
         self.get_config('config_site', self.app_path)
         if app:  #we have multiserve...
             self.get_config('config_multi', 'evoke.')
-
-#    print "SCHEMA======>"
-#    for k,v in self.schemaClasses.items():
-#      print ""
-#      print k,": ",v.__dict__
-#    print ""
-#    print "====== END OF SCHEMA"
-
-# convert self.config to a class
+        # convert self.config to a class
         self.Config = type("Config", (object, ), self.config)
-        #add app name
+        # add app name
         self.Config.appname = appname
         # and path
         self.Config.app_fullpath = app_fullpath

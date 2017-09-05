@@ -39,18 +39,23 @@ class dispatcherCode(Parser):
         # find and validate the user, and store it as req.user
         self.apps[req._v_domain]["User"].validate_user(req)
 
+        # we will need config below...
+        config = self.apps[req._v_domain]['Config']
+ 
         # handle the flat files first
         # note that apache may have already fielded these
-        # ( the obsolete "/Resources/" is included for now so that any old links don't break... - IHM 31/10/2014)
-        if uri == b"/favicon.ico" or \
-           uri.startswith(b"/site/") or \
-           uri.startswith(b"/Resources/") or \
+        if uri.startswith(b"/site/"):
+            path = '%s%s' % (config.site_filepath, str(uri[6:],'utf8'))
+            print("URI,path >>>> ",str(uri,'utf8'),path) 
+            return self.doFlatfile(req, path)
+        elif uri == b"/favicon.ico" or \
            uri.endswith(b'.html'):
-            path = '%s/%s' % (self.htdocs_path(req), str(uri, 'utf8'))
+#            path = '%s%s' % (config.site_filepath[:-1], str(uri, 'utf8'))
+            path = '%s%s' % (config.site_filepath, str(uri[1:],'utf8'))
+            print("URI,path >>>> ",str(uri,'utf8'),path) 
             return self.doFlatfile(req, path)
 
         # remove the prefix (urlpath), if any
-        config = self.apps[req._v_domain]['Config']
         if config.urlpath and uri.startswith(
                 bytes(bytearray(config.urlpath, 'utf8'))):
             URI = uri[len(config.urlpath):]
@@ -81,10 +86,6 @@ class dispatcherCode(Parser):
             req.error = "invalid URI type %s" % uri_type
             return self.doUnknown(req)
 
-    def htdocs_path(self, req):
-        ""
-        app = self.apps[req._v_domain]["Config"].app
-        return "../%shtdocs" % (app and ("%s/" % app) or "", )
 
     def doObject(self, req, cls, uid, method, url):
         ""
@@ -205,6 +206,7 @@ class dispatcherCode(Parser):
     return flat file
     BEWARE: assumes that the file won't change for a week
     '''
+#        print ("flat file name >>>>>:", name)
         try:
             kind = name.rsplit('.', 1)[1].lower()
             mime = (kind == 'ico') and 'image/x-icon' or types_map.get('.'+kind) \

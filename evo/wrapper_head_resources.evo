@@ -13,6 +13,6 @@ link: rel="stylesheet", type="text/css" ,href="/site/evoke/css/evoke.css"
 script: src="/site/evoke/js/evoke.js"
 
 ## App (these should be added via wrapper_head_resources_hook.evo override in the app's evo directory)
-#link: rel="stylesheet", type="text/css" , href="/site/%s/css/app.css" % appname
-#script: src="/site/%s/js/app.js" % appname, type="text/javascript"
+link: rel="stylesheet", type="text/css" , href="/site/css/app.css"
+script: src="/site/js/app.js", type="text/javascript"
 

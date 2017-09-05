@@ -222,7 +222,7 @@ class Image(object):
 
     def thumb_loc(self):
         "location of jpeg thumbnail of the image - the thumbnail may not exist"
-        return '%ssite/data/%s/%s' % (self.Config.htdocs_filepath,
+        return '%sdata/%s/%s' % (self.Config.site_filepath,
                                       self.thumb_folder(), self.thumb_name())
 
     def thumb_folder(self):
