@@ -1,4 +1,4 @@
-#! python3
+#! python
 #
 # currently assumes that we are creating apps in a virtualenv folder, which contains the evoke distribution
 
