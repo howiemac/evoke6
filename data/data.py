@@ -174,7 +174,14 @@ class InvalidOrderDirectionError(Error):
     "Direction in ORDER BY clause not valid."
 
 
-class MassProducedSQLDataObject(SQLDataObject):
+class Subscriptable(type):
+    """metaclass to allow a class to be subscripted"""
+
+    def __getitem__(cls, x):
+        return cls.get(x)
+
+
+class MassProducedSQLDataObject(SQLDataObject, metaclass=Subscriptable):
     "SQL data object for use with makeDataClass"
 
     @classmethod

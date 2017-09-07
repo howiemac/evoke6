@@ -46,6 +46,36 @@ class Page(Image, File):
     fileaddkinds = imageaddkinds  #kinds which can have child files
     validchildkinds = {'root': ['page'], 'admin': ['page'], 'page': ['page']}
 
+
+    # #### Kinds - convenience methods to ease listing
+
+    class Kindlist(object):
+        """
+    Allow us to call Page.kinds.<kind>(**params)
+    instead of Page.list(kind=<kind>, **params)
+    """
+
+        def __init__(self, Page):
+            self.Page = Page
+
+        def __getattr__(self, kind):
+            "return a partially applied list function"
+
+            def list(**params):
+                # assume we want stage='posted', unless told otherwise
+                params.setdefault('stage', 'posted')
+                return self.Page.list(kind=kind, **params)
+
+            return list
+
+    @classmethod
+    def __class_init__(self):
+        """Import additional kind-classes"""
+        self.kinds = self.Kindlist(self)
+
+
+    # overrides
+
     @classmethod
     def get(self, uid, data={}):
         "override get"
@@ -64,6 +94,14 @@ class Page(Image, File):
             ob.__override_classname__ = override_classname
         ob.get = self.__get__
         return ob
+
+
+    def __repr__(self):
+        ""
+        return """<UID: %d | Name: %s | Kind: %s | Stage: %s>\n""" % (
+            self.uid, self.name, self.kind, self.stage)
+
+
 
 ########## access restrictions ############################
 
