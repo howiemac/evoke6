@@ -11,7 +11,7 @@ from .data.schema import *
 
 #do NOT override these in other config files
 evoke_major_version=5 # do not change this - odd numbers are development, even numbers are stable
-evoke_minor_version=6 # minor code version - do not play with this unless you are SURE you know what you are doing....
+evoke_minor_version=7 # minor code version - do not play with this unless you are SURE you know what you are doing....
 
 # the following are set in serve/app.py and can be used but not should not be overridden - they are here for information only:
 # copyright= ... # this message is shown on the console log on startup
@@ -49,6 +49,7 @@ port = '8080'  #for multiserve, this MUST be put in config_multi.py, to override
 
 #the following applies only to evoke/config_multi.py and must be set there
 apps = []
+
 
 #the following data schema may be subclassed or overidden in an app's config.py
 
