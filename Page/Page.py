@@ -414,20 +414,22 @@ class Page(Image, File):
         self.when = DATE()
         self.set_seq()
 
-    def expand_text(self, req):
-        "expands ** into child pages"
-        pages = self.text.sectioned()
-        if len(pages) > 1:
-            for s in reversed(pages[1:]):
-                n, t = s.split('\n', 1)
-                self.create_child_page(name=n, text=t)
-        return pages[0]
+# THE FOLLOWING WORKED pre-markdown BUT NEEDS A DIFFERENT TRIGGER (i.e. not **) NOW...
+#
+#    def expand_text(self, req):
+#        "expands ** into child pages"
+#        pages = self.text.sectioned()
+#        if len(pages) > 1:
+#            for s in reversed(pages[1:]):
+#                n, t = s.split('\n', 1)
+#                self.create_child_page(name=n, text=t)
+#        return pages[0]
 
     def flush_page(self, req):
         ""
         self.text = self.text.replace("\r",
                                       "")  #remove pesky carriage returns!
-        self.text = self.expand_text(req)
+#        self.text = self.expand_text(req)
         #    print "++++++++++++++ saving ++++++++++++++++",self.text
         self.flush()
 #    print "++++++++++++++ per MySQL ++++++++++++++++",self.get(self.uid).text
@@ -711,7 +713,7 @@ class Page(Image, File):
             if drafts:
                 self.add_option(req, 'my drafts (%s)' % drafts, 'drafts')
 
-        # move, copy, export, import moced here for convenience of access - BUT NOTE: SHOULD BE POSTs not GETs (IHM 13/12/2015)
+        # move, copy, export, import moved here for convenience of access - BUT NOTE: SHOULD BE POSTs not GETs (IHM 13/12/2015)
         move = self.get_move(req)
         if move:
             self.add_option(
@@ -1265,6 +1267,10 @@ class Page(Image, File):
        data files (images etc) are included (by get_branch(expand=True)) 
        user stub homepages are also included, so that authorship can be retained
        will only work for movekinds
+
+       O/S - export requires local URLS to be replaced with external ones.. 
+         - see old versions of TEXT.py
+
     """
         # get header info
         data = dict(
@@ -1527,3 +1533,17 @@ class Page(Image, File):
         ""
         x = 1 + 'three'
         return self.view(req)
+
+    ############## ONE-OFF FIXES ##################
+
+#    def to_md(self,req):
+#      ""
+#      n=0
+#      for i in self.list():
+#        if i.text:
+#          i.text=i.text.to_markdown(req)
+#          i.flush()
+#          n+=1
+#      req.message='%s pages converted to md' % n
+#      return self.view(req)
+

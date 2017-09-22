@@ -4,3 +4,4 @@ div: cls="row"
 #    article:
       self.Page_view_images.evo
       self.text.formatted(req)
+#      self.text.markdown(req)
