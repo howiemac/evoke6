@@ -87,9 +87,11 @@ border: none;
 
 /* generated text styles for lib.TEXT() */
 
+/*
 h2,h3 {
  margin-top:5px; /* override of bootstrap default */
 }
+*/
 
 strong {
  color:#F30;

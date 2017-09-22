@@ -51,13 +51,14 @@ class EvoLinks(Pattern):
     # is target a valid page uid?
     try:
       page = self.md.req.user.Page.get(safeint(target))
-      target = page.purl()
+      target = page.url()
       caption = caption or page.name or target
       extra = {}
     except:
       # we assume an external url
       caption = caption or target
-      extra = {'rel': 'nofollow'}
+      extra={}
+#      extra = {'rel': 'nofollow'}
     a = etree.Element('a')
     a.text = caption
     a.set('href', target)
