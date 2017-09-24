@@ -47,18 +47,21 @@ class EvoLinks(Pattern):
     target = m.group(2).strip()
     caption = (m.group(3) or '').strip()
     # after = m.group(4)
-
+    cls=''
+    extra = {}
     # is target a valid page uid?
-    try:
-      page = self.md.req.user.Page.get(safeint(target))
-      target = page.url()
+    uid=safeint(target)
+    if uid:
+      try:
+        page = self.md.req.user.Page.get(uid)
+        target = page.url()
+      except:
+        extra={'class': 'broken'}
       caption = caption or page.name or target
-      extra = {}
-    except:
+    else:
       # we assume an external url
       caption = caption or target
-      extra={}
-#      extra = {'rel': 'nofollow'}
+      extra = {'rel': 'nofollow'}
     a = etree.Element('a')
     a.text = caption
     a.set('href', target)

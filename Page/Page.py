@@ -427,10 +427,9 @@ class Page(Image, File):
 
     def flush_page(self, req):
         ""
-        self.text = self.text.replace("\r",
-                                      "")  #remove pesky carriage returns!
+        #remove pesky carriage returns!
+        self.text = self.text.replace("\r","")
 #        self.text = self.expand_text(req)
-        #    print "++++++++++++++ saving ++++++++++++++++",self.text
         self.flush()
 #    print "++++++++++++++ per MySQL ++++++++++++++++",self.get(self.uid).text
 
@@ -448,7 +447,6 @@ class Page(Image, File):
         page.stage = req.stage or 'draft'
         page.stamp()
         page.flush_page(req)
-        page.seed_rating(req)
         #O/S leave trail entry
         return page
 
@@ -902,31 +900,61 @@ class Page(Image, File):
         req.page = 'details'
         return req.redirect(req.user.url("edit"))
 
-###################### ratings ###################
+###################### ratings / enable / disable ###################
 
-# O/S TO BE REPLACED WITH NEW SETUP????
+    ratedkinds=("page","image")
+    downratings=(-4,-4,-3,-2,-4,0,1)
+    upratings=(0,-2,-1,-1,1,2,2)
 
-    def rate(self, req):
-        "store vote and update ratings"
-        if abs(int(req.rating)) > 2: req.rating = 0  #prevent hacking
-        # update page rating
-        self.rating = req.rating
+    # access these via rating_class()
+    rating_symbols=('remove-sign','question-sign','ok-sign','heart','question-sign','ok-sign','heart')
+
+    def rating_class(self,rating=None):
+        "give class for rating"
+        # rating should be in (-4,-3,-2,-1,0,1,2)
+        r=min(6,max(0,(rating if rating is not None else self.rating)+4))
+        return "glyphicon glyphicon-%s" % self.rating_symbols[r]
+
+    def set_rating(self,rating):
+        "sets self.rating to rating"
+        self.rating=rating
         self.flush()
-        return self.view(req)
 
-    def seed_rating(self, req):
-        "set default rating"
-        #update page rating
-        self.rating = req.rating or 0
-        self.flush()
+    def minrating(self):
+        "returns minimum rating accepted by global filter"
+        return self.get(1).rating
 
-    def get_star_classes(self, req):
-        "page star rating display"
-        rat = self.rating + 2
-        stars = []
-        for i in range(5):
-            stars.append("star%s%s" % (rat >= i and "on" or "off", ""))
-        return stars
+    def set_global_filter(self,req):
+        "sets root rating (used as a global filter) to req.rating"
+        self.get(1).set_rating(req.rating)
+        return req.redirect(self.url())
+
+    def rate_up(self,req):
+        "increase rating"
+        try:
+            self.rating=self.upratings[self.rating+4]
+            self.flush()
+        except:
+            pass
+        return req.redirect(self.url())
+
+    def rate_down(self,req):
+        "decrease rating"
+        try:
+            self.rating=self.downratings[self.rating+4]
+            self.flush()
+        except:
+            pass
+        return req.redirect(self.url())
+
+    def toggle_disable(self,req):
+        "disable / enable"
+        try:
+            self.rating=(0,0,1,2,-3,-2,-1)[self.rating+4]
+            self.flush()
+        except:
+            pass
+        return req.redirect(self.url())
 
 ###################### emails ##########################
 
@@ -1488,15 +1516,14 @@ class Page(Image, File):
 
     info.permit = 'admin page'
 
-    def tidy(self, req):
+    def delf(self, req):
         "removes superfluous line ends from text - e.g. emailed text"
-        self.text = self.text.replace('\r', '').replace('\n\n', '\r').replace(
-            '\n', ' ').replace('\r', '\n\n')
+        self.text = delf(self.text)
         self.flush()
-        req.message = "text tidied"
-        return self.view(req)
+        req.message = "line ends removed"
+        return self.edit(req)
 
-    tidy.permit = 'admin page'
+    delf.permit = 'admin page'
 
     ################# FIXES ########################
 

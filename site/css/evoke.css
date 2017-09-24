@@ -86,43 +86,7 @@ border: none;
 }
 
 /* generated text styles for lib.TEXT() */
-
-/*
-h2,h3 {
- margin-top:5px; /* override of bootstrap default */
-}
-*/
-
-strong {
- color:#F30;
-}
-cite {
- display:block;
- color:#666;
-}
-tt,pre {
- font-family: courier, monospace;
- background: #FEE;
- white-space:pre; 
-}
-pre {
- margin:.2em;
- border:.1em solid #CCC;
-}
-blockquote.evoke {/* override bootstrap defaults*/
- color:#555;
- font-size: inherit; 
- margin:0;
-}
-q {
- color:#555;
- font-style:oblique;
-/* quotes: none; */
-}
-
-
-
-/* generated text broken links */
+/* broken links */
 .broken {
  color:#800;
 }
@@ -212,51 +176,36 @@ width: auto !important;
 
 
 /********************** ratings ********************/
+
 #rating {
- float:right;
- }
-.stars {
- border:0.1em solid #DDD;
- height:1.6em;
- width:7.7em;
-/* clear:right;*/
-}
-.staron, .staroff, .staronyou, .staroffyou {
- height:1.5em;
- width:1.5em;
- float:left;
-}
-.staron{
-background: transparent url(/site/images/stars/staron.gif) no-repeat;   
-}
-.staroff{
-background: transparent url(/site/images/stars/staroff.gif)  no-repeat;   
-}
-.staronyou{
-background: transparent url(/site/images/stars/staronyou.gif) no-repeat;   
-}
-.staroffyou{
-background: transparent url(/site/images/stars/staroffyou.gif) no-repeat;   
+float:right;
 }
 
-.rated_dead, .rated_bad, .rated_ok, .rated_good{
- float:left;
- height:1.6em;
- width:1.5em;
-}
-.rated_dead{
-background: transparent url(/site/images/stars/rated_dead.jpg) no-repeat;
-}
-.rated_bad{
-background: transparent url(/site/images/stars/rated_bad.jpg) no-repeat;
-}
-.rated_ok{
-background: transparent url(/site/images/stars/rated_ok.jpg) no-repeat;
-}
-.rated_good{
-background: transparent url(/site/images/stars/rated_good.jpg) no-repeat;
+#rate a, #rate a:hover{
+text-decoration: none;
+color:#FFF;
 }
 
+#rate a.enabled {
+color:#444;
+}
+
+#rate a.disabled {
+color:#CCC;
+}
+
+
+#rate a:hover{
+color:#F44;
+}
+
+#rate a.plus:hover{
+color:#4F4;
+}
+
+.rate-down, .enabled, .disabled, .rate-up{
+font-size: 2em;
+}
 
 /******************* user ******************/
 

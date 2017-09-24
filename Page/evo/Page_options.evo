@@ -9,5 +9,11 @@ if (not req.user.as_guest()):
         ul: cls="list-inline"
           for (label,url,hint) in req.pageoptions:
             if label:
-              li:cls="tab%s" % (url.rsplit('/',1)[-1].startswith(req.page or ' ') and " selected" or "",)
-                a:label, href=url, title=hint, page=req.page, nam=url.rsplit('/',1)[-1]
+#              li:cls="tab%s" % (url.rsplit('/',1)[-1].startswith(req.page or ' ') and " selected" or "",)
+              selected = url.rsplit('/',1)[-1].startswith(req.page or ' ')
+              if selected:
+                li:cls = "tab selected mark"
+                  span:label
+              else:
+                li:cls = "tab"
+                  a:label, href=url, title=hint, page=req.page, nam=url.rsplit('/',1)[-1]
