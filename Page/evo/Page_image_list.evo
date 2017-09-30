@@ -2,9 +2,9 @@ if self.get_images() and self.images:
  div: id="image_list"
   table:
    tr:cls='head'
-    th:
+    th:'image'
     th:'name'
-    th:'caption &nbsp;'
+    th:'caption'
     th:'display'
    for i in self.images:
     url=self.url('add_image?edit=%s' % i.uid)
@@ -16,7 +16,7 @@ if self.get_images() and self.images:
       a:href=url
        div:i.code
        if i.text:
-        div:"(%s)" % i.text
+        small:"(%s)" % i.text
      td:
       a:i.name,href=url
      td:

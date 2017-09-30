@@ -19,6 +19,10 @@
 .bright {color:#F30;}
 .spaced { margin:2em 0;}
 
+form {
+ padding:0.5em;
+}
+
 select, button {
 cursor:pointer;
 }
@@ -183,6 +187,9 @@ float:right;
 
 #rate a, #rate a:hover{
 text-decoration: none;
+}
+
+#rate a {
 color:#FFF;
 }
 
@@ -193,7 +200,6 @@ color:#444;
 #rate a.disabled {
 color:#CCC;
 }
-
 
 #rate a:hover{
 color:#F44;
