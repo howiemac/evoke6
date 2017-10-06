@@ -46,6 +46,36 @@ class Page(Image, File):
     fileaddkinds = imageaddkinds  #kinds which can have child files
     validchildkinds = {'root': ['page'], 'admin': ['page'], 'page': ['page']}
 
+
+    # #### Kinds - convenience methods to ease listing
+
+    class Kindlist(object):
+        """
+    Allow us to call Page.kinds.<kind>(**params)
+    instead of Page.list(kind=<kind>, **params)
+    """
+
+        def __init__(self, Page):
+            self.Page = Page
+
+        def __getattr__(self, kind):
+            "return a partially applied list function"
+
+            def list(**params):
+                # assume we want stage='posted', unless told otherwise
+                params.setdefault('stage', 'posted')
+                return self.Page.list(kind=kind, **params)
+
+            return list
+
+    @classmethod
+    def __class_init__(self):
+        """Import additional kind-classes"""
+        self.kinds = self.Kindlist(self)
+
+
+    # overrides
+
     @classmethod
     def get(self, uid, data={}):
         "override get"
@@ -64,6 +94,14 @@ class Page(Image, File):
             ob.__override_classname__ = override_classname
         ob.get = self.__get__
         return ob
+
+
+    def __repr__(self):
+        ""
+        return """<UID: %d | Name: %s | Kind: %s | Stage: %s>\n""" % (
+            self.uid, self.name, self.kind, self.stage)
+
+
 
 ########## access restrictions ############################
 
@@ -376,21 +414,22 @@ class Page(Image, File):
         self.when = DATE()
         self.set_seq()
 
-    def expand_text(self, req):
-        "expands ** into child pages"
-        pages = self.text.sectioned()
-        if len(pages) > 1:
-            for s in reversed(pages[1:]):
-                n, t = s.split('\n', 1)
-                self.create_child_page(name=n, text=t)
-        return pages[0]
+# THE FOLLOWING WORKED pre-markdown BUT NEEDS A DIFFERENT TRIGGER (i.e. not **) NOW...
+#
+#    def expand_text(self, req):
+#        "expands ** into child pages"
+#        pages = self.text.sectioned()
+#        if len(pages) > 1:
+#            for s in reversed(pages[1:]):
+#                n, t = s.split('\n', 1)
+#                self.create_child_page(name=n, text=t)
+#        return pages[0]
 
     def flush_page(self, req):
         ""
-        self.text = self.text.replace("\r",
-                                      "")  #remove pesky carriage returns!
-        self.text = self.expand_text(req)
-        #    print "++++++++++++++ saving ++++++++++++++++",self.text
+        #remove pesky carriage returns!
+        self.text = self.text.replace("\r","")
+#        self.text = self.expand_text(req)
         self.flush()
 #    print "++++++++++++++ per MySQL ++++++++++++++++",self.get(self.uid).text
 
@@ -408,7 +447,6 @@ class Page(Image, File):
         page.stage = req.stage or 'draft'
         page.stamp()
         page.flush_page(req)
-        page.seed_rating(req)
         #O/S leave trail entry
         return page
 
@@ -673,7 +711,7 @@ class Page(Image, File):
             if drafts:
                 self.add_option(req, 'my drafts (%s)' % drafts, 'drafts')
 
-        # move, copy, export, import moced here for convenience of access - BUT NOTE: SHOULD BE POSTs not GETs (IHM 13/12/2015)
+        # move, copy, export, import moved here for convenience of access - BUT NOTE: SHOULD BE POSTs not GETs (IHM 13/12/2015)
         move = self.get_move(req)
         if move:
             self.add_option(
@@ -862,31 +900,61 @@ class Page(Image, File):
         req.page = 'details'
         return req.redirect(req.user.url("edit"))
 
-###################### ratings ###################
+###################### ratings / enable / disable ###################
 
-# O/S TO BE REPLACED WITH NEW SETUP????
+    ratedkinds=("page","image")
+    downratings=(-4,-4,-3,-2,-4,0,1)
+    upratings=(0,-2,-1,-1,1,2,2)
 
-    def rate(self, req):
-        "store vote and update ratings"
-        if abs(int(req.rating)) > 2: req.rating = 0  #prevent hacking
-        # update page rating
-        self.rating = req.rating
+    # access these via rating_class()
+    rating_symbols=('remove-sign','question-sign','ok-sign','heart','question-sign','ok-sign','heart')
+
+    def rating_class(self,rating=None):
+        "give class for rating"
+        # rating should be in (-4,-3,-2,-1,0,1,2)
+        r=min(6,max(0,(rating if rating is not None else self.rating)+4))
+        return "glyphicon glyphicon-%s" % self.rating_symbols[r]
+
+    def set_rating(self,rating):
+        "sets self.rating to rating"
+        self.rating=rating
         self.flush()
-        return self.view(req)
 
-    def seed_rating(self, req):
-        "set default rating"
-        #update page rating
-        self.rating = req.rating or 0
-        self.flush()
+    def minrating(self):
+        "returns minimum rating accepted by global filter"
+        return self.get(1).rating
 
-    def get_star_classes(self, req):
-        "page star rating display"
-        rat = self.rating + 2
-        stars = []
-        for i in range(5):
-            stars.append("star%s%s" % (rat >= i and "on" or "off", ""))
-        return stars
+    def set_global_filter(self,req):
+        "sets root rating (used as a global filter) to req.rating"
+        self.get(1).set_rating(req.rating)
+        return req.redirect(self.url())
+
+    def rate_up(self,req):
+        "increase rating"
+        try:
+            self.rating=self.upratings[self.rating+4]
+            self.flush()
+        except:
+            pass
+        return req.redirect(self.url())
+
+    def rate_down(self,req):
+        "decrease rating"
+        try:
+            self.rating=self.downratings[self.rating+4]
+            self.flush()
+        except:
+            pass
+        return req.redirect(self.url())
+
+    def toggle_disable(self,req):
+        "disable / enable"
+        try:
+            self.rating=(0,0,1,2,-3,-2,-1)[self.rating+4]
+            self.flush()
+        except:
+            pass
+        return req.redirect(self.url())
 
 ###################### emails ##########################
 
@@ -1227,6 +1295,10 @@ class Page(Image, File):
        data files (images etc) are included (by get_branch(expand=True)) 
        user stub homepages are also included, so that authorship can be retained
        will only work for movekinds
+
+       O/S - export requires local URLS to be replaced with external ones.. 
+         - see old versions of TEXT.py
+
     """
         # get header info
         data = dict(
@@ -1444,15 +1516,14 @@ class Page(Image, File):
 
     info.permit = 'admin page'
 
-    def tidy(self, req):
+    def delf(self, req):
         "removes superfluous line ends from text - e.g. emailed text"
-        self.text = self.text.replace('\r', '').replace('\n\n', '\r').replace(
-            '\n', ' ').replace('\r', '\n\n')
+        self.text = delf(self.text)
         self.flush()
-        req.message = "text tidied"
-        return self.view(req)
+        req.message = "line ends removed"
+        return self.edit(req)
 
-    tidy.permit = 'admin page'
+    delf.permit = 'admin page'
 
     ################# FIXES ########################
 
@@ -1489,3 +1560,17 @@ class Page(Image, File):
         ""
         x = 1 + 'three'
         return self.view(req)
+
+    ############## ONE-OFF FIXES ##################
+
+#    def to_md(self,req):
+#      ""
+#      n=0
+#      for i in self.list():
+#        if i.text:
+#          i.text=i.text.to_markdown(req)
+#          i.flush()
+#          n+=1
+#      req.message='%s pages converted to md' % n
+#      return self.view(req)
+

@@ -236,7 +236,22 @@ def page(req, pagesize=50):
     return '%s,%s' % (offset, pagesize)
 
 
-################### html formattingr ###################
+################### text formatting ##################
+
+def delf(text):
+    """remove carriage-returns and single line-feeds from text
+       - leaves double line-feeds (paragraph breaks)
+       - also removes trailing spaces
+       - source must be a string
+    """
+    # remove trailing spaces
+    lines=[line.rstrip() for line in text.split('\n')]
+    cleantext='\n'.join(lines)
+    # remove carriage returns and single line feeds
+    return cleantext.replace('\r','').replace('\n\n','\r').replace('\n',' ').replace('\r','\n\n')
+
+
+################### html formatting ###################
 
 
 def idf(t):
@@ -244,7 +259,7 @@ def idf(t):
     return t.replace(' ', '').replace('(', '').replace(')', '')
 
 
-################### http formattingr ###################
+################### http formatting ###################
 
 #def url_safe(text):
 #  return urllib.quote(text)

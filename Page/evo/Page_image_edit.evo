@@ -2,38 +2,39 @@
 #
 # note: when editing an image, self must be an image
 #
-form: action=self.url("edit_image"), cls="form-horizontal", role="form"
-#, enctype="multipart/form-data"  #required for replace (below)
+div: cls="col-sm-6"
+ form: action=self.url("edit_image"), cls="form-horizontal", role="form"
+ #, enctype="multipart/form-data"  #required for replace (below)
   fieldset:
-    legend: "edit image"    
-    div:cls="form-group"
-      div: cls="col-md-10"
+    legend: "edit image"
+    div: cls="form-group"
+      div: cls="col-sm-12"
         a:href=self.url(), title=self.name
           img: cls="acts", src=self.thumb_url(), alt=self.name
-    div:cls="form-group"
-      label:'caption', for_id='image_desc', cls="col-md-2"
-      div: cls="col-md-10"
-        input: id='image_desc', name='name', value=self.name, onChange="confirmExit = true;", onKeyPress="confirmExit = true;"
+    div: cls="form-group"
+      label:'caption', for_id='image_desc', cls="col-sm-2 control-label"
+      div: cls="col-sm-10"
+        input: id='image_desc', name='name',cls='col-sm-11', value=self.name, onChange="confirmExit = true;", onKeyPress="confirmExit = true;"
         #textarea: self.name, id='image_desc', name='name', cols=80
-    div:cls="form-group"
-      label:'position', cls="col-md-2"
-      div: cls="col-md-10"
+    div: cls="form-group"
+      label:'position', cls="col-sm-2 control-label"
+      div: cls="col-sm-10"
         pos=self.get_pos()
         div: cls="btn-group", role="group"
           for p in ("left","center","right"):
             label: cls="radio-inline"
               input: type="radio",name="pos" ,value=p, checked="checked" if p==pos else ""
               p
-    div:cls="form-group"
-      label:'size', cls="col-md-2"
-      div: cls="col-md-10"
+    div: cls="form-group"
+      label:'size', cls="col-sm-2 control-label"
+      div: cls="col-sm-10"
         size=self.get_size()
+        input: name='width',id='imagewidth',size=4,value=self.get_width()
         div: cls="btn-group", role="group"
           for s in ("full","thumb"):
             label: cls="radio-inline"
               input: type="radio",name="size" ,value=s, checked="checked" if s==size else ""
               s
-        input: name='width',id='imagewidth',size=4,value=self.get_width()
 
 ## links O/S - NOT YET IMPLEMENTED (needs somewhere to store the link - in prefs?) O/S
 #      span:self.stage
@@ -47,15 +48,14 @@ form: action=self.url("edit_image"), cls="form-horizontal", role="form"
 #        input: id="image_file",size='40px', type="file", name="filedata", accept="image/jpeg,image/png,image/gif", onChange="confirmExit = true;", onKeyPress="confirmExit = true;"
 #        input: type="hidden", name="filename", value=""
 #    button:'save', onclick="javascript:form.filename.value=form.filedata.value;confirmExit = false",accesskey="S", cls="btn btn-default"
-
-    button:'save', onclick="confirmExit = false",accesskey="S", cls="btn btn-primary"
+    div:
+      br:
+      button:'save', onclick="confirmExit = false",accesskey="S", cls="btn btn-primary"
     #/fieldset
-
-#  a:'delete', role="button", href=self.url("remove_image"), cls="btn btn-default", onclick="return confirm('are you sure you wish to delete this image?')"
 #/form
-form: action=self.url("remove_image"), onclick="return confirm('are you sure you wish to delete this image?')"
-#  fieldset:
-#    legend: "delete this image"    
+ form: action=self.url("remove_image"), cls='form-horizontal', onclick="return confirm('are you sure you wish to delete this image?')"
+  fieldset:
+    legend: "delete this image"    
     button:'delete', onclick="confirmExit = false", cls="btn btn-default"
 #div:
 #  a: "...back", href=self.url()

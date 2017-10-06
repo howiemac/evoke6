@@ -12,4 +12,4 @@ meta: name="ROBOTS", content="INDEX,FOLLOW"
 meta: name="creation-date", content=lib.DATE()
 meta: name="revisit-after", content="7 days"
 # Mobile first layout
-meta: name="viewport", content="width=device-width, initial-scale=1"
+meta: name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no"

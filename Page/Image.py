@@ -56,7 +56,7 @@ class Image(object):
         full = dat[1] == 'full'
         d = ['%s %s %s' % (dat[0], dat[1], full and dat[2] or dat[3])]
         if full:
-            d.append('( thumb %s)' % dat[3])
+            d.append('thumb %s' % dat[3])
         return d
 
     def get_stage_data(self):

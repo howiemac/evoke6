@@ -4,9 +4,19 @@ div:id='contentheader_bottom'
 # page info ####################################################
   if self.uid>1:
    div: id='pageinfo',cls='light'
+    # ancestry "breadcrumbs"
     span:req.prep or 'from', cls="wee"
-    src=self.get_pob() 
-    a:src.get_name().replace(" ","&nbsp;"),href=src.url(), cls="norm"
+    for i in self.get_ancestry():
+      '/'
+      a:i.get_name().replace(" ","&nbsp;"),href=i.url(), cls="norm"
+## ol breadcrumb
+#    ol: cls='breadcrumb'
+#      for i in self.get_ancestry():
+#        li: cls='breadcrumb-item'
+#          a:i.get_name().replace(" ","&nbsp;"),href=i.url(), cls="norm"
+## non-breadcrumb, parent only
+#    src=self.get_pob() 
+#    a:src.get_name().replace(" ","&nbsp;"),href=src.url(), cls="norm"
     span:cls="wee"
       "&nbsp;&nbsp;"
       if self.kind in self.postkinds:
