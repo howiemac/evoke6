@@ -18,11 +18,19 @@
 .light {color:#777;}
 .bright {color:#F30;}
 .spaced { margin:2em 0;}
+<<<<<<< HEAD:site/evoke/css/evoke.css
 /*
 form {
  padding:0.5em;
 }
 */
+=======
+
+form {
+ padding:0.5em;
+}
+
+>>>>>>> 2ac8a5b94b8b00c21b149ac254a894c87a947b35:site/css/evoke.css
 select, button {
 cursor:pointer;
 }
