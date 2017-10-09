@@ -68,7 +68,7 @@ def evoke_version(app):
 def pre_schema(app):
     "database adjustments prior to loading the schema"
     global version
-    print('checking patches for "%s"' % app.Config.appname)
+#    print('checking patches for "%s"' % app.Config.appname)
     config = app.Config
     version = evoke_version(app)
     try:

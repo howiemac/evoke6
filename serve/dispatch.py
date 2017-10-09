@@ -46,13 +46,13 @@ class dispatcherCode(Parser):
         # note that apache may have already fielded these
         if uri.startswith(b"/site/"):
             path = '%s%s' % (config.site_filepath, str(uri[6:],'utf8'))
-            print("URI,path >>>> ",str(uri,'utf8'),path) 
+            # print("URI,path >>>> ",str(uri,'utf8'),path) 
             return self.doFlatfile(req, path)
         elif uri == b"/favicon.ico" or \
            uri.endswith(b'.html'):
 #            path = '%s%s' % (config.site_filepath[:-1], str(uri, 'utf8'))
             path = '%s%s' % (config.site_filepath, str(uri[1:],'utf8'))
-            print("URI,path >>>> ",str(uri,'utf8'),path) 
+            # print("URI,path >>>> ",str(uri,'utf8'),path) 
             return self.doFlatfile(req, path)
 
         # remove the prefix (urlpath), if any
@@ -251,7 +251,10 @@ class dispatcherInit(object):
         self.release = self._sync.release
         self.locked = self._sync.locked
         # license
-        print(list(self.apps.values())[0]['Config'].copyright)
+        config = list(self.apps.values())[0]['Config']
+        print(config.copyright)
+        # port
+        print('serving on port %s' % config.port)
 
 
 class Dispatcher(Url, dispatcherCode, dispatcherInit):

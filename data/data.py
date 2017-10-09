@@ -537,7 +537,7 @@ class MassProducedSQLDataObject(SQLDataObject, metaclass=Subscriptable):
 
     @classmethod
     def list_int(cls,
-                 item,
+                 item='uid',
                  like={},
                  isin={},
                  orderby='',

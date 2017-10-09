@@ -54,6 +54,7 @@ port = '8080'  #for multiserve, this MUST be put in config_multi.py, to override
 
 #the following applies only to evoke/config_multi.py and must be set there
 apps = []
+app_module_path=""
 
 #the following data schema may be subclassed or overidden in an app's config.py
 

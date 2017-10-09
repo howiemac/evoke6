@@ -9,8 +9,7 @@ from urllib.parse import quote
 try:
     import user_agents
 except ImportError:
-    print("""user_agents module not found.
-    See https://pypi.python.org/pypi/user-agents/""")
+#    print("""user_agents module not found. See https://pypi.python.org/pypi/user-agents/""")
     user_agents = None
 
 # Session based cache

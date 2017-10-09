@@ -19,11 +19,12 @@ from setuptools import setup, find_packages
 
 from os import path, walk
 
-#from config_base import evoke_major_version, evoke_minor_version
+# get the evoke_version from config_base.py
+# O/S HOW?????? *****************
+evoke_version="5.9"
 
+# get the long description from the README file
 here = path.abspath(path.dirname(__file__))
-
-# Get the long description from the README file
 with open(path.join(here, 'evoke/README.md')) as f:
     long_description = f.read()
 
@@ -37,6 +38,9 @@ def site_files():
       files.append((dp,[(dirpath+'/'+f) for f in filenames]))
 #    print(dirpath,filenames)
   return files
+
+#print (site_files())
+
 
 ## find all of the files in a given directory tree
 #def files(where):
@@ -52,7 +56,7 @@ setup(
     name='evoke',
 
     # Versions should comply with PEP440
-    version='5.6',
+    version=evoke_version,
     description='a simple and powerful python web framework with pythonic "evo" templating',
     long_description=long_description,
 
@@ -113,7 +117,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['twisted','mysqlclient','pillow'],
+    install_requires=['twisted','mysqlclient','pillow','markdown'],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax
@@ -160,10 +164,6 @@ setup(
     # In this case, 'data_file' will be installed into '<sys.prefix>/my_data'
     # data_files=[('my_data', ['data/data_file'])],
     data_files=site_files(),
-#    [
-#        ('site/css', ['evoke/site/css/evoke.css']),
-#        ('site/js', ['evoke/site/js/evoke.js']),
-#    ],
 
     # To provide executable scripts, use entry points in preference to the
     # "scripts" keyword. Entry points provide cross-platform support and allow

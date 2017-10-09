@@ -9,7 +9,9 @@ THIS SHOULD NOT BE STORED IN THE REPOSITORY
 
 """
 
-apps=['sun','evoke'] #essential
-port='8080' #essential
+apps=['myapp','anotherapp'] # essential: list here the apps to be run
+port='8080'
+
+
 
 

@@ -54,10 +54,13 @@ class EvoLinks(Pattern):
     if uid:
       try:
         page = self.md.req.user.Page.get(uid)
+        name = page.name
         target = page.url()
       except:
-        extra={'class': 'broken'}
-      caption = caption or page.name or target
+        extra = {'class': 'broken'}
+        name = ""
+        target = ""
+      caption = caption or name or target
     else:
       # we assume an external url
       caption = caption or target

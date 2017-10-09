@@ -18,7 +18,7 @@ from .url import Url
 from .baseobject import Baseobject
 from inspect import isclass
 from os.path import lexists, split
-from os import getcwd 
+from os import getcwd
 from sys import modules,path
 from evoke import evoke_filepath
 from evoke.data import init_db, makeDataClass, schema
@@ -33,30 +33,36 @@ class App:
         """get the configuration for this app
        the app parameter will have a value only when using multiserve
     """
-        appname = app or split(split(getcwd())[0])[1]
+        appname = app or split(getcwd())[1]
         app_fullpath = getcwd()
         #    print ">>>>>>>>>>>>>>>>> APP ",appname
         self.app = app
-        # get paths
-        self.app_path = app and ("%s.code." % app) or ''
-        if app:  #multiserve
-            self.app_filepath = '../%s/code/' % app
-        else:  # single app
-            self.app_filepath = ''  # i.e. the app folder, where single serve.py is called from
-#        print (">>>>>>>>>>>>>>>>> app filepath: ",self.app_filepath)
-#        print (">>>>>>>>>>>>>>>>> evoke filepath: ",evoke_filepath)
+
+        # get app_path
+        self.app_path = app and ("%s." % app) or ''
+
         # build the schemaClasses and config dictionaries - siteconfig overrides config, which in turn overides baseconfig
         self.schemaClasses = {}
         self.config = dict(
             app=app,
-            app_filepath=self.app_filepath,
             evoke_filepath=evoke_filepath)
+#        print("%s evoke_filepath: " % self.app,evoke_filepath)
         self.get_config('config_base', 'evoke.')
         self.get_config('config_site', 'evoke.')
         self.get_config('config', self.app_path)
         self.get_config('config_site', self.app_path)
         if app:  #we have multiserve...
             self.get_config('config_multi', 'evoke.')
+
+        # get app_filepath 
+        if app:  #multiserve
+            self.app_filepath = '%s%s/' % (self.config['app_module_path'],app)
+            self.config['site_filepath'] = self.app_filepath+self.config['site_filepath']
+        else:  # single app
+            self.app_filepath = ''  # i.e. the app folder, where single serve.py is called from
+        self.config["app_filepath"]=self.app_filepath
+        #print (">>>>>>>>>>>>>>>>> app filepath: ",self.app_filepath)
+
         # convert self.config to a class
         self.Config = type("Config", (object, ), self.config)
         # add app name
@@ -106,7 +112,7 @@ All rights reserved.
 
     def get_config(self, module, path):
         "extract the schema classes, and the config items from the config modules"
-        #    print "-----------",path+module
+        #print ("GETTING CONFIG:",path+module)
         try:
             config = __import__(path + module, globals(), locals(),
                                 '__main__')  #import the module
@@ -122,6 +128,8 @@ All rights reserved.
 
     def make_objects(self, schemaClasses):
         ""
+        #print("MAKING OBJECTS: ",schemaClasses )
+        #print("FILEPATH:", self.app_filepath)
         tables = {}
         for (k, c) in schemaClasses:
             #      print "....object...",k,c.__name__
@@ -147,7 +155,7 @@ All rights reserved.
         "builds the self.classes dictionary"
         # set up class bases
         bases = []
-        #    print (">>>>>>>>>>>>>>>>>>>",id,klass,module ,schemaClass._v_columns)
+        #print ("MAKING OBJECT for module:",module)
         bases.append(
             getattr(__import__(module, globals(), locals(), klass),
                     klass))  #yuk... but it works...for evoke.module.klass too
@@ -173,6 +181,8 @@ def get_apps(applist):
         app = App(a)
         for d in app.Config.domains:
             apps[d] = app.classes
+#    # port
+#    print('serving on port %s' % app.Config.port)
     return apps
 
 

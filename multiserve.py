@@ -1,12 +1,13 @@
 """
-evoke mutli-app server script, for Twisted 
+evoke multi-app server script, for Twisted 
 """
 
-#fix the path
+#fix the path - some servers need this...
 import os, sys
-sys.path.append(
-    os.path.abspath('.'))  #some servers need this for some reason...
-sys.path.append(os.path.abspath('..'))
+sys.path.append(os.path.abspath('.'))  
+from config_multi import app_module_path
+sys.path.append(os.path.abspath(app_module_path))
+
 
 from twisted.application import service
 from evoke.serve import start

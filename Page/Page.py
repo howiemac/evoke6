@@ -21,7 +21,7 @@ try:
     import PyRSS2Gen
     has_rss = True
 except ImportError:
-    print("no rss generator.")
+#    print("no rss generator.")
     has_rss = False
 
 # local imports
@@ -474,10 +474,9 @@ class Page(Image, File):
         if not (req.error or req.message):
             req.message = "text saved at %s" % DATE().time(
                 sec=True, date=False)
-#    return self.redirect(req,page.stage=='draft' and 'edit' or 'view',self.uid)
         return req.redirect(
-            self.url(self.stage == 'draft' and 'edit'
-                     or 'view'))  # anchor removed
+            self.url('edit' if self.stage == 'draft'
+                     else 'view'))  # anchor removed
 
     ###################### view (and edit) page ##################################
 
