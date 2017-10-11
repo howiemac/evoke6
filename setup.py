@@ -1,16 +1,12 @@
 """a setuptools based setup module.
 
-THIS HAS TO BE COPIED (or symlinked) TO THE DIRECTORY THAT CONTAINS the evoke directory, before executing (from there):
-
  python3 setup.py bdist_wheel
 
 the wheel will then be in the dist folder
 
 Then, from a virtualenv:
 
- wheel install <wheelname>
-
-This will not install package dependencies (use PIP for the install to achieve this).
+ pip install dist/<wheelname>
 
 """
 

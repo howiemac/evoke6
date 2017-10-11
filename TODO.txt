@@ -1,0 +1,23 @@
+
+once installed, the following needs automated:
+
+- create the evoke config_site.py
+  - with the local mysql connect params
+
+- apps:
+  - do we require them to be installed in site_packages - otherwise we need to be very clever with filepaths..
+  
+  - currently successfully tested deepian with app in root of virtual env (ie same place that site is)
+    -  note: non-virtualenv install will install site as /usr/local/site
+
+  - need code to add site subfolder and contents:
+    -create app config_site.py: with the site_filepath variable 
+    - copy a default favicon.ico to site/<appname>/
+    - copy the following (from where?) to site/<appname>/
+      - css
+      - js
+      - images (do we need this???)
+    - symlink site/<appnam>/evoke as "../evoke"
+    - symlink site/<appname>/data to the actual data folder, wherever that is located..
+
+  - see also evoke_package/deepian/TODO.txt
