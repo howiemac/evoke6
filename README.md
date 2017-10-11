@@ -30,6 +30,8 @@ However, python packaging and automated install are a recent work in progress.
 
 For now: manually configure evoke and create your evoke app(s):
 
+## manual install
+
 - pip will have installed the "evoke" module at eg: `usr/lib/python3.6/site-packages` (or `usr/local/lib..` etc.)
 
   - create an `evoke/config_site.py` file, similar to `evoke/config_site.example`, but with your mysql connect parameters
@@ -49,20 +51,18 @@ For now: manually configure evoke and create your evoke app(s):
   - symlink `yourapp/site` to that subfolder `site/yourapp`
 
 
-- start the app:
+### start the app:
 
     cd yourapp
-
     ./start
 
-- stop the app
+### stop the app
 
     yourapp/stop
 
-- restart the app:
+### restart the app:
 
     cd yourapp
-
     ./restart
 
 
