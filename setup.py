@@ -17,35 +17,25 @@ from os import path, walk
 
 # get the evoke_version from config_base.py
 # O/S HOW?????? *****************
-evoke_version="5.9"
+evoke_version="5.10"
 
 # get the long description from the README file
 here = path.abspath(path.dirname(__file__))
-with open(path.join(here, 'evoke/README.md')) as f:
+with open(path.join(here, 'README.md')) as f:
     long_description = f.read()
 
 # find all of the site data files
 def site_files():
-  tree=walk('evoke/site')
+  tree=walk('site')
   files=[]
   for (dirpath,dirnames,filenames) in tree:
+    print(dirpath,filenames)
     if filenames:
-      dp=dirpath.split('/',1)[1]
+      dp=dirpath.split('/',1)[0]
       files.append((dp,[(dirpath+'/'+f) for f in filenames]))
-#    print(dirpath,filenames)
   return files
 
 #print (site_files())
-
-
-## find all of the files in a given directory tree
-#def files(where):
-#  tree=walk(where)
-#  files=[]
-#  for (dirpath,dirnames,filenames) in tree:
-#    for f in filenames:
-#      files.append(dirpath+'/'+f)
-#  return files
 
 # the main setup:
 setup(
