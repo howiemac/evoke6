@@ -52,6 +52,7 @@ For now: manually configure evoke and create your evoke app(s):
 - start the app:
 
     cd yourapp
+
     ./start
 
 - stop the app
@@ -61,7 +62,9 @@ For now: manually configure evoke and create your evoke app(s):
 - restart the app:
 
     cd yourapp
+
     ./restart
+
 
 When you first start an app, the mysql database for that app will be created.
 
@@ -70,23 +73,23 @@ The app will be visible at the domain and port specified, eg (using the defaults
     http://127.0.0.1:8080/
 
 
-contents
-==
+## contents
 
-application (app) generation 
---
+
+### application (app) generation 
+
 - app: prototype application
 - create_app: script to create an app
 
-library routines
---
+### library routines
+
 - lib: library routines, including data types  
 - data: database interface
 - render: .evo html templating
 - serve: application server
 
-evoke classes for use in apps
---
+### evoke classes for use in apps
+
 - security classes
   - User: 
   - Reset:
@@ -96,19 +99,19 @@ evoke classes for use in apps
   - Page: page hierarchy, including image and file handling
   - Var.py: system variables
 
-application support
---
+### application support
+
 - evo: default system-wide templates
 - site: flat file resources common to all apps 
 
-system configuration
---
+### system configuration
+
  - config_base.py: defaults
  - config_site.py: overrides for this server
  - config_multi.py: multi-app server config (see below)
 
-multi-app server (optional, as apps may be run individually)
---
+### multi-app server (optional, as apps may be run individually)
+
  - devstart: development start script (runs in foreground) 
  - start: production start script (runs in background)
  - stop: production stop script
