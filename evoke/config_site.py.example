@@ -7,5 +7,5 @@ THIS SHOULD NOT BE STORED IN THE REPOSITORY
 
 """
 
-connect=("127.0.0.1", "root", "123456") #database connection parameters - normally only required here
+connect=("127.0.0.1", "root", "") #database connection parameters - domain,user,password - normally only required here
 

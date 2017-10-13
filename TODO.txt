@@ -1,23 +1,62 @@
+## version management
+
+version info is currently changed manually (required for every pypy update) in
+- setup.py
+- install_evoke
+- evoke/config_base.py
+
+AUTOMATE THIS!
+
+
+## auto-install
 
 once installed, the following needs automated:
 
-- create the evoke config_site.py
-  - with the local mysql connect params
+- create the evoke config_site.py (by renaming config_site.py.example?) with the local mysql connect params
+  - TEST FOR AVAILABILITY OF MYSQL?? and inform that if it has to be installed
+  - ASK FOR THE MYSQL PARAMETERS (if the default is no good)
+- the `config_site.py.example` file could be removed completely, and `config_site.py` created from code
+- location of site?
+  - Inform you where it is and/or ASK WHERE YOU WANT IT PUT
+    -  currently the site root will be located at <sys.prefix>/site
+      - for a virtualenv, <sys.prefix> will be the folder where evoke is installed from
+      - otherwise, <sys.prefix> will be /usr/site or /usr/local/site (depending on the location of the active python3)
+  - store the this site path in evoke/config_site.py as `sitepath` ???
 
-- apps:
-  - do we require them to be installed in site_packages - otherwise we need to be very clever with filepaths..
+
+### app creation
+
+Whilst mature apps can be made into python site_packages, new apps and apps in development should be placeable anywhere you like
+
+We need a script (or module) to:
+
+- ASK FOR APPNAME ?? or just use 'app' for the first one? BETTER TO ASK.
+- create app module
+  - per old `create_app` script...
+  - create/ alter `<appname>/site` symlink - once we know where it has to link to
+    - OR (BETTER) store this as a local `config_site.py` variable (adjust the file/image code accordingly)
+- add `site/appname` folder and contents:
+  - create local `config_site.py`: with the `port` and `domains` info
+    - note that, for the first app, the `config_base.py` defaults can be used
+      - ie: simply adjust `evoke/serve/app.py` to allow for there being no `config_site.py`
+    - the `config_site.py.example` file can be removed completely
+  - copy the contents of `evoke/app/site` to `<sitepath>site/<appname>/`
+  - (OPTIONAL) symlink site/<appname>/data to the actual data folder, wherever that is located..
+
+### evoke master app?
+
+Possibility: make evoke itself a master app (database "evoke"), which would allow:
+
+- browser-based configuration:
+  - inform of `site` location (ie `sitepath`), and offer to move it
+  - all app creation
+  - other maintenance / system configuration
+- evoke documentation
+
+This evoke app would have its own install requirements:
+  - test for mysql, and config the connection
+
+
+
+
   
-  - currently successfully tested deepian with app in root of virtual env (ie same place that site is)
-    -  note: non-virtualenv install will install site as /usr/local/site
-
-  - need code to add site subfolder and contents:
-    -create app config_site.py: with the site_filepath variable 
-    - copy a default favicon.ico to site/<appname>/
-    - copy the following (from where?) to site/<appname>/
-      - css
-      - js
-      - images (do we need this???)
-    - symlink site/<appnam>/evoke as "../evoke"
-    - symlink site/<appname>/data to the actual data folder, wherever that is located..
-
-  - see also evoke_package/deepian/TODO.txt

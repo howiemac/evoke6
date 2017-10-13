@@ -17,12 +17,31 @@ from os import path, walk
 
 # get the evoke_version from config_base.py
 # O/S HOW?????? *****************
-evoke_version="5.10"
+evoke_version="5.12"
 
 # get the long description from the README file
-here = path.abspath(path.dirname(__file__))
-with open(path.join(here, 'README.md')) as f:
-    long_description = f.read()
+long_description ="""
+The evoke module allows you to create evoke apps, which are twisted web-server-applications which:
+
+- use twisted webserver (optionally proxied via apache) to serve the data
+- use mysql for data storage, and present the data to you as python objects
+- produce HTML output via evoke's own "evo" templating
+
+## requirements
+
+- python3 (tested on 3.6.2)
+- linux (should work on BSD and MacOS also - but not yet tested)
+- mysql
+
+## caution
+Evoke is a stable system, which has been in production use for commercial mission-critical systems since its inception in 2001.
+
+However, python packaging and automated install are a recent (October 2017) work in progress, and some manual configuration is currently required. (see the file README.md )
+"""
+
+#here = path.abspath(path.dirname(__file__))
+#with open(path.join(here, 'README.md')) as f:
+#    long_description = f.read()
 
 # find all of the site data files
 def site_files():

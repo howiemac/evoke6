@@ -4,26 +4,25 @@ This is the python 3 version of EVOKE, currently in _active_ development.
 
 EVOKE is a simple and powerful python web framework with pythonic "evo" templating.
 
-The evoke module allows you to create twisted evoke apps (server applications) which:
+The evoke module allows you to create evoke apps, which are twisted web-server-applications which:
 
+- use twisted webserver (optionally proxied via apache) to serve the data
 - use mysql for data storage, and present the data to you as python objects
 - produce HTML output via evoke's own "evo" templating
-- use twisted webserver (optionally proxied via apache) to serve the data
-
 
 ## requirements
 
 - python3 (tested on 3.6.2)
-- linux (should work on BSD and MacOS also - but no yet tested)
+- linux (should work on BSD and MacOS also - but not yet tested)
 - mysql
 
 ## installation
 
-    pip3 install python
+    pip3 install evoke
 
 ## usage
 
-Evoke is a longstanding and stable system, that has been in use for commercial
+Evoke is a longstanding and stable system, which has been in use for commercial
 mission-critical systems since its inception in 2001.
 
 However, python packaging and automated install are a recent work in progress.
@@ -73,46 +72,3 @@ The app will be visible at the domain and port specified, eg (using the defaults
     http://127.0.0.1:8080/
 
 
-## contents
-
-
-### application (app) generation 
-
-- app: prototype application
-- create_app: script to create an app
-
-### library routines
-
-- lib: library routines, including data types  
-- data: database interface
-- render: .evo html templating
-- serve: application server
-
-### evoke classes for use in apps
-
-- security classes
-  - User: 
-  - Reset:
-  - Permit:
-  - Session:
-- foundation classes
-  - Page: page hierarchy, including image and file handling
-  - Var.py: system variables
-
-### application support
-
-- evo: default system-wide templates
-- site: flat file resources common to all apps 
-
-### system configuration
-
- - config_base.py: defaults
- - config_site.py: overrides for this server
- - config_multi.py: multi-app server config (see below)
-
-### multi-app server (optional, as apps may be run individually)
-
- - devstart: development start script (runs in foreground) 
- - start: production start script (runs in background)
- - stop: production stop script
- - multiserve.py: twisted application - called by the above scripts
