@@ -43,6 +43,19 @@ We need a script (or module) to:
   - copy the contents of `evoke/app/site` to `<sitepath>site/<appname>/`
   - (OPTIONAL) symlink site/<appname>/data to the actual data folder, wherever that is located..
 
+### evoke install / app creation - per CJH:
+
+create_app at the moment copies the code and html/site folders to new locations. I think it should work as follows:
+
+-    create app directory
+-    copy code and htdocs to new app directory
+-    check for existence of evoke/config_site.py
+-    if evoke/config_site.py doesn't exist then prompt for database,db user and db password. Add these to evoke/config_site.py
+-    create app/config_site.py
+-    prompt for new admin password. Store in env variable
+-    start the app
+-    on first run check for admin password in env. Set (in db) and remove env variable.
+
 ### evoke master app?
 
 Possibility: make evoke itself a master app (database "evoke"), which would allow:
