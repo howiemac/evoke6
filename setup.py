@@ -14,10 +14,12 @@ Then, from a virtualenv:
 from setuptools import setup, find_packages
 
 from os import path, walk
+from shutil import copyfile
 
-# get the evoke_version from config_base.py
-# O/S HOW?????? *****************
-evoke_version="5.14"
+# get the evoke_version from VERSION file
+evoke_version=open("VERSION").read().split('=')[1].strip()
+# and copy version file to evoke/
+copyfile("VERSION","evoke/VERSION")
 
 # get the long description from the README file
 long_description ="""
@@ -138,13 +140,18 @@ setup(
     #    'sample': ['package_data.dat'],
     #},
     package_data={
-        '': ['evo/*.evo']+['devstart','restart','start','stop','README'],
+        '': ['evo/*.evo']+['devstart','README'],
         'evoke': [
+          'CONTENTS.md',
+          'VERSION',
           'create_app',
-          'config_multi.py.example','config_site.py.example',
-          'README.md','LICENSE'
+          'restart-multi',
+          'start-multi',
+          'stop-multi',
+          'config_multi.py.example',
+          'config_site.py.example',
           ],
-        'evoke.app': ['config_site.py.example'],
+        'evoke.app': ['config_site.py.example','restart','start','stop','CONTENTS'],
     },
 
 #    package_data={

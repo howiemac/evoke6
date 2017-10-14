@@ -62,8 +62,11 @@ def post_schema_patch(version, app):
 #    print 'PATCH: site prefs patched'
 
 def evoke_version(app):
-    "version number combining major and minor"
-    return app.Config.evoke_major_version*1000000+app.Config.evoke_minor_version
+    """single version number combining the major and minor parts
+    (for internal use only, allowing simple numerical comparison)
+    """
+    major,minor=app.Config.evoke_version.split(".")
+    return int(major)*1000000+int(minor)
 
 def pre_schema(app):
     "database adjustments prior to loading the schema"
@@ -117,7 +120,8 @@ def set_version(app):
     config = app.Config
     vars = app.classes['Var']
     var_version = vars.fetch('evoke-version')
-    newversion=evoke_version(app)
+    newversion=evoke_version(app)    # eg 5000123
+    version=app.Config.evoke_version # eg 5.123
     if not var_version.value:
         vars.add(
             'evoke-version',
@@ -125,19 +129,19 @@ def set_version(app):
             textvalue='valid',
             datevalue='',
             comment='used for patching')  #create version var, dated today
-        print("PATCH:version is %s" % newversion)
+        print("PATCH:version is %s" % version)
     elif var_version.value < newversion:
         vars.amend(
             'evoke-version',
             newversion,
             textvalue='valid',
             datevalue='')  #update version, text and date
-        print("PATCH:version updated to %s" % newversion)
+        print("PATCH:version updated to %s" % version)
     elif var_version.textvalue != 'valid':
         vars.amend(
             'evoke-version', textvalue='valid',
             datevalue='')  #update text and date
-        print("PATCH:version updated to %s" % newversion)
+        print("PATCH:version updated to %s" % version)
 
 
 def do(sql):

@@ -74,6 +74,8 @@ class App:
         if not self.db_started:  #now that we have connect parameters, start db if this is the first app...
             init_db(self.Config.connect)
             self.db_started = True
+        # add evoke version
+        self.Config.evoke_version=open("%sVERSION" % evoke_filepath).read().split('=')[1].strip()
         # do any pre-schema patching
         patch.pre_schema(self)
 
@@ -101,11 +103,12 @@ class App:
         self.Config.domain = self.Config.domain or self.Config.domains[0]
         # ASSUME the system is running on port 80, as far as the outside world is concerned:
         self.Config.urlhost = self.Config.urlhost or 'http://' + self.Config.domain  
+        # add version and copyright message 
         self.Config.copyright = """
-EVOKE version %s.%06d
+EVOKE version %s
 Copyright (C) 2017 Evoke Foundation
 All rights reserved.
-""" % (self.Config.evoke_major_version, self.Config.evoke_minor_version)
+""" % self.Config.evoke_version
 
         # do any post-schema patching
         patch.post_schema(self)

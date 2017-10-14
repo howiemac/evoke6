@@ -9,12 +9,9 @@ configuration value here act as defaults, so NO PARAMETER SHOULD BE REMOVED
 
 from .data.schema import *
 
-#do NOT override these in other config files
-evoke_major_version=5 # do not change this - odd numbers are development, even numbers are stable
-evoke_minor_version=14 # minor code version - do not play with this unless you are SURE you know what you are doing....
-
 # the following are set in serve/app.py and can be used but not should NOT be overridden - they are here for information only:
-# copyright= ... # this message is shown on the console log on startup
+# evoke_version= ... 
+# copyright= ...  this message is shown on the console log on startup
 # app_filepath= ...
 
 # the following is set in evoke/__init__.py and should NOT be overridden
@@ -69,7 +66,7 @@ class Var(Schema):
     insert = [
         dict(
             name='evoke-version',
-            value=evoke_major_version*1000000+evoke_minor_version,
+            value=5000000,
             comment='used for patching')
     ]  # this entry is essential
 
