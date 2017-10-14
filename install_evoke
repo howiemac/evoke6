@@ -3,4 +3,4 @@
 # install evoke locally from the wheel
 #
 ./make_wheel
-pip3 install dist/evoke-5.12-py3-none-any.whl
+pip3 install dist/evoke-5.14-py3-none-any.whl

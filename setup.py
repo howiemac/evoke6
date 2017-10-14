@@ -17,7 +17,7 @@ from os import path, walk
 
 # get the evoke_version from config_base.py
 # O/S HOW?????? *****************
-evoke_version="5.12"
+evoke_version="5.14"
 
 # get the long description from the README file
 long_description ="""
@@ -27,13 +27,16 @@ The evoke module allows you to create evoke apps, which are twisted web-server-a
 - use mysql for data storage, and present the data to you as python objects
 - produce HTML output via evoke's own "evo" templating
 
-## requirements
+requirements
+------------
 
 - python3 (tested on 3.6.2)
 - linux (should work on BSD and MacOS also - but not yet tested)
 - mysql
 
-## caution
+caution
+-------
+
 Evoke is a stable system, which has been in production use for commercial mission-critical systems since its inception in 2001.
 
 However, python packaging and automated install are a recent (October 2017) work in progress, and some manual configuration is currently required. (see the file README.md )
@@ -50,8 +53,7 @@ def site_files():
   for (dirpath,dirnames,filenames) in tree:
     print(dirpath,filenames)
     if filenames:
-      dp=dirpath.split('/',1)[0]
-      files.append((dp,[(dirpath+'/'+f) for f in filenames]))
+      files.append((dirpath,[(dirpath+'/'+f) for f in filenames]))
   return files
 
 #print (site_files())
