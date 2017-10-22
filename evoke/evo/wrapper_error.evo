@@ -1,4 +1,4 @@
-# message, warning, or error display
+# grace: non-bootstrap message, warning, or error display
 div: cls="row", 
   div: id='popup',cls="col-md-12 "
     for m in ('message','warning','error'):

@@ -4,5 +4,6 @@ html: lang="en"
   wrapper_head.evo
   body: id=req.pageid or 'standardbody'
     div: cls="container"
-      wrapper_error.evo
+#      wrapper_error.evo
+      wrapper_alert.evo
       content.here
