@@ -1,13 +1,13 @@
 /* generic styling */
 
-.huge, .big, .norm, .wee .tiny {
+.huge, .big, .norm, .small, .wee .tiny {
  /*text-align:left; */
  font-weight:normal;
 }
 .huge {font-size: 2em;}
 .big {font-size: 1.5em;}
 .norm {font-size: 1em;}
-.wee  {font-size: .8em;}
+.small, .wee {font-size: .8em;}
 .tiny {font-size: .6em;}
 
 
@@ -19,10 +19,11 @@
 .bright {color:#F30;}
 .spaced { margin:2em 0;}
 
-
+/*
 form {
  padding:0.5em;
 }
+*/
 
 select, button {
 cursor:pointer;
@@ -217,9 +218,8 @@ color:#F44;
 color:#4F4;
 }
 
-
 .rate-down, .enabled, .disabled, .rate-up{
-font-size: 2em;
+font-size: 1.6em;
 }
 
 /******************* user ******************/
