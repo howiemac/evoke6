@@ -905,19 +905,35 @@ class Page(Image, File):
     downratings=(-4,-4,-3,-2,-4,0,1)
     upratings=(0,-2,-1,-1,1,2,2)
 
+# non glyphicon version
+
+    # access these via rating_symbol()
+    rating_symbols=('&times;','?','&radic;','&hearts;','?','&radic;','&hearts;')
+
+    def rating_symbol(self,rating=None):
+        "give symbol for rating"
+        # rating should be in (-4,-3,-2,-1,0,1,2)
+        r=min(6,max(0,(rating if rating is not None else self.rating)+4))
+        return self.rating_symbols[r]
+
+
+# glyphicon version
+
     # access these via rating_class()
-    rating_symbols=('remove-sign','question-sign','ok-sign','heart','question-sign','ok-sign','heart')
+    rating_classes=('remove-sign','question-sign','ok-sign','heart','question-sign','ok-sign','heart')
 
     def rating_class(self,rating=None):
         "give class for rating"
         # rating should be in (-4,-3,-2,-1,0,1,2)
         r=min(6,max(0,(rating if rating is not None else self.rating)+4))
-        return "glyphicon glyphicon-%s" % self.rating_symbols[r]
+        return "glyphicon glyphicon-%s" % self.rating_classes[r]
+
+# generic
 
     def set_rating(self,rating):
         "sets self.rating to rating"
         self.rating=rating
-        self.flush()
+        self.flush() 
 
     def minrating(self):
         "returns minimum rating accepted by global filter"
