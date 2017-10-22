@@ -10,6 +10,7 @@ THIS SHOULD NOT BE STORED IN THE REPOSITORY
 """
 
 apps=['myapp','anotherapp'] # essential: list here the apps to be run
+app_module_path="/home/me/evoke-apps/" # this tells multiserve where to find the app modules
 port='8080'
 
 

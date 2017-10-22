@@ -7,7 +7,8 @@ div:id='contentheader_bottom'
     # ancestry "breadcrumbs"
     span:req.prep or 'from', cls="wee"
     for i in self.get_ancestry():
-      '/'
+      if i.uid>1:
+        '/'
       a:i.get_name().replace(" ","&nbsp;"),href=i.url(), cls="norm"
 ## ol breadcrumb
 #    ol: cls='breadcrumb'

@@ -18,19 +18,12 @@
 .light {color:#777;}
 .bright {color:#F30;}
 .spaced { margin:2em 0;}
-<<<<<<< HEAD:site/evoke/css/evoke.css
-/*
-form {
- padding:0.5em;
-}
-*/
-=======
+
 
 form {
  padding:0.5em;
 }
 
->>>>>>> 2ac8a5b94b8b00c21b149ac254a894c87a947b35:site/css/evoke.css
 select, button {
 cursor:pointer;
 }
@@ -109,18 +102,25 @@ border: none;
 #message, #warning, #error {
 border: solid 0.1em #AAA;
 padding: 0.2em
- }
+}
+
+#message a, #warning a, #error a {
+float:right;
+margin-right:1em;
+font-weight: bold;
+/*font-size:1.2em;*/
+}
 
 #message {
 color:#000;
 background-color: #ddffa1;
- }
+}
 
 #warning {
 color:#000;
 background-color: #ffe280;
 font-weight:bold;
- }
+}
 
 #error {
 color: #fffd1e;
@@ -201,21 +201,22 @@ text-decoration: none;
 color:#FFF;
 }
 
-#rate a.enabled {
+#rate a.enabled, #rate a.disabled:hover {
 color:#444;
 }
 
-#rate a.disabled {
+#rate a.disabled, #rate a.enabled:hover {
 color:#CCC;
 }
 
-#rate a:hover{
+#rate a.rate-down:hover{
 color:#F44;
 }
 
-#rate a.plus:hover{
+#rate a.rate-up:hover{
 color:#4F4;
 }
+
 
 .rate-down, .enabled, .disabled, .rate-up{
 font-size: 2em;

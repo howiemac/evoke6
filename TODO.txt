@@ -1,12 +1,5 @@
-## version management
-
-version info is currently changed manually (required for every pypy update) in
-- setup.py
-- install_evoke
-- evoke/config_base.py
-
-AUTOMATE THIS!
-
+## site
+- remove the site symlink from apps and replace with a "sitepath" in app.config_site.py)
 
 ## auto-install
 

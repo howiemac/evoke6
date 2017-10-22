@@ -2,13 +2,19 @@ PACKAGING ISSUES
 ==
 - logs currently being written to a log directory created wherever evoke is called from... They should have a standard location eg var/log/<appname>.
 
-BUG
+BUGS
 ==
+- Page.get_prefs() fails to traverse the pref hierarchy (as used in Page.get_pref()) for pref values when self.prefs is empty, but uses the defaults instead:
+  - prefs should be either hierarchical OR have code defaults in page.py - not both.
+    - if hierarchical then the defaults should be set in the prefs of the root page (ie in config_base.py)
+    - otherwise do away with the hierarchy in Page.get_pref(), and if self.prefs is empty then use the existing defaults (as per get_prefs())
+
 - data.list() cannot cope with a "where" parameter for any word(s) starting with s - eg where="%%star%%"
   eg see evoke.Page.page.py line 1152: heads.extend(self.list(where='name like "%%%s%%"' % term,orderby='uid desc'))
   because of evoke.data.py line  402:  whereclauses = (' and '.join(sqlparts)).replace("%","%%").replace('%%s','%s') # double the % wildcard (but not any %s)
   i.e. The substitution of "%%s" is a bodge too far! REVERT TO PRE - SQL INJECTION PROTECTION data.py (ie as per grace 8)
 CURRENTLY BODGED BY FORCING UPPERCASE FOR SEARCH TERM IN THIS PARTICULAR EXAMPLE.....
+
 
 
 LATER

@@ -999,6 +999,8 @@ class Page(Image, File):
     def get_prefs(self):
         "returns dictionary of page preferences, from cache if possible - will use defaults if no prefs have yet been set"
         #
+        # BUG! - THIS SHOULD TRAVERSE THE PREF HIERARCHY WHEN LOCAL PREF IS NOT YET CREATED, i.e. AS PER get_pref()
+        #
         # preferences code NEEDS REDESIGN, to recognise  use of empty strings
         # currently, only checkboxes can have an empty string as a valid override preference
         # PREFERENCES SHOULD BE TOTALLY AMALGAMATED WITH Config
