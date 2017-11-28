@@ -4,12 +4,12 @@ div: id='content'
   file=self.get(req.edit) if req.edit else None
   if file:
     file.Page_file_edit.evo
-  div: cls='col-sm-6' 
+  div: cls='col-6' 
    form: action=self.url("add_file"), enctype="multipart/form-data" , id='uploadform', cls="form-horizontal", role="form"
     fieldset:
       legend: 'add a file'
       div: cls="form-group" 
-        div: cls="col-md-12"
+        div:
           input: type="file", name="filedata", accesskey="B"
       button:'upload', onclick="javascript:form.filename.value=form.filedata.value;", accesskey="U", cls="btn btn-primary"
 #     buttonhot:'upload', onclick="$('filename').val($('filedata'.val()))" DOESN'T WORK

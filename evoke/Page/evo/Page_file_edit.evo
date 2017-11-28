@@ -2,19 +2,19 @@
 #
 # note: when editing a file : self must be a file
 #
-div: cls='col-sm-6'
+div: cls='col-6'
  form: action=self.url("edit_file"), cls="form-horizontal", role="form"
 #, enctype="multipart/form-data"  #required for replace (below)
   fieldset:
     legend: "edit file: %s" % self.code 
     div:cls="form-group"
-      label:'caption', for_id='file_desc', cls="col-sm-2 control-label"
-      div: cls="col-sm-10"
+      label:'caption', for_id='file_desc', cls="col-2 control-label"
+      div: cls="col-10"
         input: id='file_desc', name='name', size=50,value=self.name, onChange="confirmExit = true;", onKeyPress="confirmExit = true;"
-      label:'filename', for_id='file_name',  cls="col-sm-2 control-label"
-      div: cls="col-sm-10"
+      label:'filename', for_id='file_name',  cls="col-2 control-label"
+      div: cls="col-10"
         input: id='file_name', name='code', size=50, value='', onChange="confirmExit = true;", onKeyPress="confirmExit = true;"
-      div:cls="col-sm-10"
+      div:cls="col-10"
         button:'save', onclick="confirmExit = false",accesskey="S", cls="btn btn-primary"
   #/fieldset
  #/form
@@ -29,7 +29,7 @@ div: cls='col-sm-6'
   fieldset:
     legend: "delete file: %s" % self.code 
     div:cls="form-group"
-      div:cls="col-sm-12"
+      div:cls="col-12"
         button:'delete', cls="btn btn-default", onclick="return confirm('are you sure you wish to delete this file?')"
   #/fieldset
  #/form

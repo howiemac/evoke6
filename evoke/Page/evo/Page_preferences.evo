@@ -9,8 +9,8 @@ div: id="content", cls="%s_content" % self.kind
       legend:'preferences'
       for name,defn in sorted(self.default_prefs[self.kind].items()):
         div:cls="form-group"
-          label:defn[1]+':', for_id="prefs_%s" % name, cls="col-md-2"
-          div: cls="col-md-10"
+          label:defn[1]+':', for_id="prefs_%s" % name, cls="col-2"
+          div: cls="col-10"
             if defn[2]=='checkbox':
               div: cls="checkbox input-lg"
                 input: type='checkbox', id="prefs_%s" % name, name=name, checked='checked' if self.get_pref(name) else '',value='Y'

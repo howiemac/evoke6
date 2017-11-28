@@ -2,7 +2,7 @@
 # add sub-page
 if not req.user.as_guest():
   div: cls="summary row"
-    div: cls="col-md-12"
+    div: cls="col-12"
      form: action=self.url("add_page"),cls='form-inline'
        # special selection criteria 
        if (self.kind in self.validchildkinds):

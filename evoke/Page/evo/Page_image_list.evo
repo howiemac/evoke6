@@ -1,5 +1,5 @@
 if self.get_images() and self.images:
- div: id="image_list col-sm-6"
+ div: id="image_list col-6"
   table:
    tr:cls='head'
     th:'image'
@@ -25,11 +25,11 @@ if self.get_images() and self.images:
         prev=lib.prev(i,self.images)
         if prev:
          a: title="move up", href=i.url("swap?swap=%s" % prev.uid) 
-          img: src='/site/images/edit_buttons/up.gif'
+          img: src="/site/evoke/images/glyphicons-214-arrow-up.png"
         next=lib.next(i,self.images)
         if next:
          a: title="move down", href=i.url("swap?swap=%s" % next.uid) 
-          img: src='/site/images/edit_buttons/down.gif'
+          img: src="/site/evoke/images/glyphicons-213-arrow-down.png"
       a:href=url
        for d in i.get_display():
         div:d
