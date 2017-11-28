@@ -8,7 +8,7 @@ The evoke module allows you to create evoke apps, which are twisted web-server-a
 
 - use twisted webserver (optionally proxied via apache) to serve the data
 - use mysql for data storage, and present the data to you as python objects
-- produce HTML output via evoke's own "evo" templating
+- produce HTML output via evoke's own "evo" templating, by default using bootstrap 4 for CSS 
 
 ## requirements
 
