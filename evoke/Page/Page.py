@@ -209,10 +209,15 @@ class Page(Image, File):
                 self._parents = []
         return self._parents
 
-    def get_children_by_kind(self, kind=""):
+    def get_children_by_kind(self, kind="", orderby='seq,uid'):
         "get all children of given (or own) kind"
         return self.list(
-            parent=self.uid, kind=kind or self.kind, orderby='seq,uid')
+            parent=self.uid, kind=kind or self.kind, orderby=orderby)
+
+    def get_minrated_children_by_kind(self, kind="", orderby='seq,uid'):
+        "get all children of given (or own) kind"
+        return self.list(
+            parent=self.uid, kind=kind or self.kind, where=f"rating>={self.minrating()}", orderby=orderby)
 
     def get_siblings_by_kind(self, kind=""):
         "get list of siblings of given (or own) kind"
@@ -936,8 +941,10 @@ class Page(Image, File):
         self.flush() 
 
     def minrating(self):
-        "returns minimum rating accepted by global filter"
-        return self.get(1).rating
+        "returns (cached) minimum rating accepted by global filter"
+        if not hasattr(self, "_v_minrating"):
+            self._v_minrating = self.list_int(item='rating',uid=1)[0]
+        return self._v_minrating
 
     def set_global_filter(self,req):
         "sets root rating (used as a global filter) to req.rating"
