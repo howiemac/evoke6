@@ -1,5 +1,9 @@
 # inclusion to display text
-div:cls='col-7'
-  self.text.formatted(req)
-div:cls='col-5'
-  self.Page_view_images.evo
+if self.get_images():
+  div:cls='col-8'
+    self.text.formatted(req)
+  div:cls='col-4'
+    self.Page_view_images.evo
+else:
+  div:cls='col-12'
+    self.text.formatted(req)
