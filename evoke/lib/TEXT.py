@@ -90,6 +90,9 @@ class TEXT(STR):
         text = self.table_rule.sub(subtable, text)
 
         return markdown(text, req)
+#        return markdown(text, req).replace("<blockquote>","<blockquote class='blockquote'>") # doesn't style properly...
+
+
 
 #    def to_markdown(self, req):
 #        """Render to html using formatter, then use html2text to convert to Markdown"""
