@@ -1,7 +1,7 @@
 # inclusion listing download files
 if self.get_files():
- div:cls='row downloads'
-  div:'files for download:',cls='light'
+ div:cls='downloads'
+  div:'files for download:',cls='col-12 light'
   ul:
    for _file in self.files:
     li:cls='download'

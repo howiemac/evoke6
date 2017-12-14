@@ -1,6 +1,6 @@
 # messages:  success, warning, or error display
 div: cls="row", 
-  div: id='popup',cls="col-md-12 "
+  div: id='popup',cls="col-12 "
     for m in ('message','info','success','warning','error'):
       if req.get(m):
         # make bootstrap-compatible - our message is their success

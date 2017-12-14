@@ -19,7 +19,7 @@ if self.get_files():
         if prev:
          a: title="move up", href=i.url("swap?swap=%s" % prev.uid) 
           img: src="/site/evoke/images/glyphicons-214-arrow-up.png"
-        next=lib.next(i,self.images)
+        next=lib.next(i,self.files)
         if next:
          a: title="move down", href=i.url("swap?swap=%s" % next.uid) 
           img: src="/site/evoke/images/glyphicons-213-arrow-down.png"
