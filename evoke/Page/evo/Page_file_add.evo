@@ -9,8 +9,7 @@ div: id='content'
     fieldset:
       legend: 'add a file'
       div: cls="form-group" 
-        div:
-          input: type="file", name="filedata", accesskey="B"
+        input: type="file", name="filedata", accesskey="B"
       button:'upload', onclick="javascript:form.filename.value=form.filedata.value;", accesskey="U", cls="btn btn-primary"
 #     buttonhot:'upload', onclick="$('filename').val($('filedata'.val()))" DOESN'T WORK
     input: type="hidden", name="filename", value=""
