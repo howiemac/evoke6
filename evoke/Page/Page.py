@@ -1008,7 +1008,7 @@ class Page(Image, File):
     page_default_prefs = {
         'order_by': ('latest', 'order items by', ('date', 'latest', 'name',
                                                   'seq')),
-        'show_time': ('Y', 'show dates and times', 'checkbox'),
+        #'show_time': ('Y', 'show dates and times', 'checkbox'),
         #    'in_menu':('','in menu?','checkbox'),
         'show_descendants': ('', 'show all descendants?', 'checkbox')
     }

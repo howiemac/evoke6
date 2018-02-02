@@ -31,7 +31,7 @@ cursor:pointer;
 
 /* blockquotes - fix to get around bootstrap requiring specific blockquote class (which doesn't work..) */
 blockquote {
-  padding: .5rem 1rem;
+  padding: .5rem 1rem .1rem 1rem;
   margin-bottom: 1rem;
   font-size: 1rem;
   border-left: .25rem solid #eceeef;
