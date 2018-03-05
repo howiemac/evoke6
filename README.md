@@ -4,6 +4,11 @@ This is the stable production python 3 version of EVOKE.
 
 For the current development version, see [evoke 7](https://github.com/howiemac/evoke).
 
+For the stable python 2 version see [evoke 4](https://github.com/howiemac/evoke4).
+
+stable versions, see evoke 6 (python 3) or evoke 4 (python 2).
+
+
 EVOKE is a simple and powerful python web framework with pythonic "evo" templating.
 
 The evoke module allows you to create evoke apps, which are twisted web-server-applications which:
