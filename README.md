@@ -1,6 +1,8 @@
-# evoke 5
+# evoke 6
 
-This is the python 3 version of EVOKE, currently in _active_ development.
+This is the stable production python 3 version of EVOKE.
+
+For the current development version, see [evoke 7](https://github.com/howiemac/evoke).
 
 EVOKE is a simple and powerful python web framework with pythonic "evo" templating.
 
