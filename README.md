@@ -1,4 +1,4 @@
-# evoke 6
+# evoke
 
 EVOKE is a simple and powerful python web framework with pythonic "evo" templating.
 
@@ -10,7 +10,7 @@ The evoke module allows you to create evoke apps, which are twisted web-server-a
 
 ## versions
 
-This is the stable production python 3 version of EVOKE.
+This is version 6 of EVOKE: the stable production python 3 version.
 
 For the current development version, see [evoke 7](https://github.com/howiemac/evoke).
 
